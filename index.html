@@ -1,0 +1,2010 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Ni Frío Ni Fuego — Una exploración profunda sobre la integración de la razón y la emoción para alcanzar la plenitud. Por Alexis Jaramillo."/>
+<meta name="keywords" content="razón, emoción, plenitud, inteligencia emocional, filosofía, desarrollo personal, Alexis Jaramillo"/>
+<meta property="og:title" content="Ni Frío Ni Fuego — Alexis Jaramillo"/>
+<meta property="og:description" content="La plenitud vive donde la razón y la emoción dejan de ser enemigas."/>
+<meta property="og:type" content="book"/>
+<title>Ni Frío Ni Fuego — Alexis Jaramillo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,300;1,400&family=Montserrat+Alternates:wght@300;400;600&display=swap" rel="stylesheet"/>
+<link rel="icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+  
+
+/* ═══════════════════════════════════
+   TOKENS & RESET
+═══════════════════════════════════ */
+:root {
+  --black:       #0A0A0A;
+  --red:         #8E1D1A;
+  --red-light:   #D6453D;
+  --ice:         #D7F3F5;
+  --ice-dim:     #9FB9D4;
+  --grey:        #6B6B6B;
+  --grey-light:  #A0A0A0;
+  --white:       #FFFFFF;
+  --white-dim:   rgba(255,255,255,0.75);
+  --white-muted: rgba(255,255,255,0.45);
+  --border:      rgba(255,255,255,0.08);
+  --card-bg:     rgba(255,255,255,0.03);
+  --font-head:   'Montserrat', sans-serif;
+  --font-body:   'Montserrat', sans-serif;
+  --ease:        cubic-bezier(0.25,0.46,0.45,0.94);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.75;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--red); color: var(--white); }
+
+img { max-width: 100%; display: block; }
+
+a { color: inherit; text-decoration: none; }
+
+/* ═══════════════════════════════════
+   TYPOGRAPHY SYSTEM
+═══════════════════════════════════ */
+.label {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 0.68rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--red-light);
+}
+
+.heading-xl {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: clamp(2.4rem, 6vw, 5rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.heading-lg {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.heading-md {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: clamp(1.3rem, 2.5vw, 2rem);
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.body-lg {
+  font-size: clamp(1rem, 1.8vw, 1.15rem);
+  font-weight: 300;
+  line-height: 1.85;
+  color: var(--white-dim);
+}
+
+.body-sm {
+  font-size: 0.9rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--white-muted);
+}
+
+/* ═══════════════════════════════════
+   LAYOUT
+═══════════════════════════════════ */
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 5vw, 4rem);
+}
+
+.container--narrow {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 5vw, 3rem);
+}
+
+section { position: relative; overflow: hidden; }
+
+/* ═══════════════════════════════════
+   DIVIDERS
+═══════════════════════════════════ */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--grey) 30%, var(--grey) 70%, transparent);
+  opacity: 0.3;
+}
+
+.divider--red {
+  background: linear-gradient(90deg, transparent, var(--red) 30%, var(--red) 70%, transparent);
+  opacity: 0.5;
+}
+
+/* ═══════════════════════════════════
+   BUTTONS
+═══════════════════════════════════ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1.1rem 2.8rem;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn--primary {
+  background: var(--red);
+  color: var(--white);
+}
+
+.btn--primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--red-light);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s var(--ease);
+}
+
+.btn--primary:hover::before { transform: scaleX(1); }
+.btn--primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(214,69,61,0.35); }
+.btn--primary span { position: relative; z-index: 1; }
+
+.btn--secondary {
+  background: transparent;
+  color: var(--white);
+  border: 1px solid rgba(255,255,255,0.3);
+}
+.btn--secondary:hover {
+  border-color: var(--white);
+  transform: translateY(-2px);
+}
+
+.btn-arrow {
+  width: 18px;
+  height: 18px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ═══════════════════════════════════
+   NAV
+═══════════════════════════════════ */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 1.25rem 0;
+  transition: all 0.4s var(--ease);
+}
+
+.nav.scrolled {
+  background: rgba(10,10,10,0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 0.9rem 0;
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav__logo {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav__logo-fire { color: var(--white); }
+.nav__logo-ice  { color: var(--red); }
+
+.nav__cta { display: none; }
+
+@media (min-width: 768px) {
+  .nav__cta { display: inline-flex; }
+}
+
+/* ═══════════════════════════════════
+   HERO
+═══════════════════════════════════ */
+.hero {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding: 8rem 0 6rem;
+  background:
+    radial-gradient(ellipse 60% 50% at 70% 50%, rgba(142,29,26,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 30% 50%, rgba(215,243,245,0.04) 0%, transparent 60%),
+    var(--black);
+}
+
+.hero__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .hero__grid { grid-template-columns: 1fr 380px; gap: 6rem; }
+}
+
+.hero__content { order: 2; }
+@media (min-width: 900px) { .hero__content { order: 1; } }
+
+.hero__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.hero__eyebrow-line {
+  width: 40px;
+  height: 1px;
+  background: var(--red-light);
+}
+
+.hero__headline {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+  
+  text-transform: uppercase;
+}
+
+.hero__headline em {
+  font-style: normal;
+  color: var(--red-light);
+}
+
+.hero__sub {
+  font-family: var(--font-head);
+  font-weight: 300;
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  color: var(--ice-dim);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.hero__text {
+  font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+  color: var(--white-dim);
+  line-height: 1.85;
+  max-width: 580px;
+  margin-bottom: 2.5rem;
+}
+
+.hero__cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+
+.hero__note {
+  font-size: 0.78rem;
+  color: var(--white-muted);
+  letter-spacing: 0.05em;
+}
+
+/* Book mockup */
+.hero__book { order: 1; display: flex; justify-content: center; }
+@media (min-width: 900px) { .hero__book { order: 2; justify-content: flex-end; } }
+
+.book-mockup {
+  position: relative;
+  width: min(280px, 80vw);
+}
+
+.book-mockup__img {
+  width: 100%;
+  border-radius: 2px;
+  box-shadow:
+    -8px 8px 40px rgba(0,0,0,0.8),
+    -2px 2px 0 rgba(255,255,255,0.04),
+    0 0 80px rgba(142,29,26,0.2);
+  transition: transform 0.6s var(--ease), box-shadow 0.6s var(--ease);
+}
+
+.book-mockup:hover .book-mockup__img {
+  transform: perspective(800px) rotateY(-8deg) translateY(-8px);
+  box-shadow:
+    -16px 20px 60px rgba(0,0,0,0.9),
+    0 0 120px rgba(142,29,26,0.3);
+}
+
+.book-mockup__glow {
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 60px;
+  background: radial-gradient(ellipse, rgba(142,29,26,0.4) 0%, transparent 70%);
+  filter: blur(15px);
+  pointer-events: none;
+}
+
+/* ═══════════════════════════════════
+   VSL
+═══════════════════════════════════ */
+.vsl {
+  padding: 7rem 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 50%, rgba(142,29,26,0.06) 0%, transparent 70%),
+    var(--black);
+}
+
+.vsl__header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.vsl__header .label { margin-bottom: 1.2rem; }
+
+.vsl__wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.vsl__frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #080808;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+
+.vsl__frame::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(...);
+    pointer-events: none;
+    z-index: 1;
+}
+
+
+.vsl__placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.vsl__placeholder:hover { background: rgba(142,29,26,0.05); }
+
+.vsl__play {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s var(--ease);
+  background: rgba(142,29,26,0.3);
+  backdrop-filter: blur(10px);
+}
+
+.vsl__placeholder:hover .vsl__play {
+  border-color: var(--red-light);
+  background: rgba(142,29,26,0.5);
+  transform: scale(1.08);
+}
+
+.vsl__play svg { margin-left: 4px; }
+
+.vsl__placeholder-text {
+  font-family: var(--font-head);
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--white-muted);
+}
+
+/* Embedded iframe */
+.vsl__frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.vsl__corners {
+  position: absolute;
+  inset: -1px;
+  pointer-events: none;
+}
+
+.vsl__corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-color: var(--red);
+  border-style: solid;
+}
+
+.vsl__corner--tl { top: 0; left: 0; border-width: 2px 0 0 2px; }
+.vsl__corner--tr { top: 0; right: 0; border-width: 2px 2px 0 0; }
+.vsl__corner--bl { bottom: 0; left: 0; border-width: 0 0 2px 2px; }
+.vsl__corner--br { bottom: 0; right: 0; border-width: 0 2px 2px 0; }
+
+.vsl__cta {
+  text-align: center;
+  margin-top: 2.5rem;
+}
+
+/* ═══════════════════════════════════
+   PROBLEMA
+═══════════════════════════════════ */
+.problema {
+  padding: 7rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.problema__header {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.problema__header .label { margin-bottom: 1.5rem; display: block; }
+
+.problema__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+@media (min-width: 640px) {
+  .problema__grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 900px) {
+  .problema__grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.problema__item {
+  padding: 2.5rem 2rem;
+  border: 1px solid var(--border);
+  border-collapse: collapse;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.4s var(--ease);
+}
+
+.problema__item::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--red), transparent);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.problema__item:hover { background: rgba(142,29,26,0.05); }
+.problema__item:hover::before { opacity: 1; }
+
+.problema__num {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: 3rem;
+  color: rgba(255,255,255,0.05);
+  line-height: 1;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.problema__icon {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.problema__title {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 0.75rem;
+}
+
+.problema__desc {
+  font-size: 0.88rem;
+  color: var(--white-muted);
+  line-height: 1.75;
+}
+
+/* ═══════════════════════════════════
+   REVELACIÓN
+═══════════════════════════════════ */
+.revelacion {
+  padding: 8rem 0;
+  text-align: center;
+  background:
+    radial-gradient(ellipse 70% 80% at 50% 50%, rgba(142,29,26,0.1) 0%, transparent 65%),
+    var(--black);
+  position: relative;
+}
+
+.revelacion__spiral {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(600px, 90vw);
+  height: min(600px, 90vw);
+  opacity: 0.04;
+  pointer-events: none;
+}
+
+.revelacion__content { position: relative; z-index: 1; }
+.revelacion .label { margin-bottom: 1.5rem; display: block; }
+
+.revelacion__title {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: clamp(1.9rem, 5vw, 4rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin-bottom: 3rem;
+}
+
+.revelacion__title .fire { color: var(--red-light); }
+.revelacion__title .ice  { color: var(--ice-dim); }
+
+.revelacion__divider {
+  width: 1px;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent, var(--grey), transparent);
+  margin: 0 auto 3rem;
+}
+
+.revelacion__body {
+  max-width: 680px;
+  margin: 0 auto;
+  font-size: clamp(1rem, 1.8vw, 1.15rem);
+  color: var(--white-dim);
+  line-height: 1.9;
+}
+
+.revelacion__quote {
+  margin: 3rem auto;
+  max-width: 580px;
+  padding: 2rem 2.5rem;
+  border-left: 2px solid var(--red);
+  text-align: left;
+  font-style: italic;
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  color: var(--white-dim);
+  line-height: 1.7;
+  background: rgba(142,29,26,0.05);
+}
+
+/* ═══════════════════════════════════
+   QUÉ DESCUBRIRÁS
+═══════════════════════════════════ */
+.descubriras {
+  padding: 7rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.descubriras__header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.descubriras__header .label { margin-bottom: 1.2rem; display: block; }
+
+.descubriras__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+@media (min-width: 640px) {
+  .descubriras__grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 900px) {
+  .descubriras__grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.discover-card {
+  background: var(--black);
+  padding: 2.5rem 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.4s var(--ease);
+}
+
+.discover-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--red-light), transparent);
+  transform: scaleX(0);
+  transition: transform 0.5s var(--ease);
+}
+
+.discover-card:hover { background: rgba(142,29,26,0.04); }
+.discover-card:hover::after { transform: scaleX(1); }
+
+.discover-card__num {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--red-light);
+  margin-bottom: 1.5rem;
+  opacity: 0.8;
+}
+
+.discover-card__title {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+}
+
+.discover-card__desc {
+  font-size: 0.87rem;
+  color: var(--white-muted);
+  line-height: 1.75;
+}
+
+/* ═══════════════════════════════════
+   PARA QUIÉN ES
+═══════════════════════════════════ */
+.para-quien {
+  padding: 7rem 0;
+  background:
+    radial-gradient(ellipse 50% 70% at 80% 50%, rgba(215,243,245,0.03) 0%, transparent 60%),
+    var(--black);
+  border-top: 1px solid var(--border);
+}
+
+.para-quien__inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+@media (min-width: 900px) {
+  .para-quien__inner { grid-template-columns: 1fr 1fr; gap: 6rem; }
+}
+
+.para-quien .label { margin-bottom: 1.5rem; display: block; }
+
+.para-quien__list {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.para-quien__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--border);
+  transition: padding-left 0.3s var(--ease);
+}
+
+.para-quien__item:hover { padding-left: 0.5rem; }
+
+.para-quien__check {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--red);
+  flex-shrink: 0;
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.para-quien__check svg { color: var(--red-light); }
+
+.para-quien__text {
+  font-size: 1rem;
+  color: var(--white-dim);
+  line-height: 1.6;
+}
+
+.para-quien__text strong {
+  color: var(--white);
+  font-weight: 600;
+}
+
+.para-quien__visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spiral-visual {
+  width: min(380px, 100%);
+  opacity: 0.6;
+}
+
+/* ═══════════════════════════════════
+   AUTOR
+═══════════════════════════════════ */
+.autor {
+  padding: 7rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.autor__inner{
+    grid-template-columns: 1fr;
+}
+
+@media (min-width:768px){
+    .autor__inner{
+        display:block;
+        max-width:800px;
+        margin:0 auto;
+    }
+}
+
+.autor__avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: rgba(142,29,26,0.1);
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: 2.5rem;
+  color: var(--red-light);
+  position: relative;
+  overflow: hidden;
+}
+
+.autor__firma img{
+    width: 140px;
+    height: auto;
+}
+
+.autor__firma img{
+    width: 140px;
+    height: auto;
+    opacity: 0.9;
+}
+
+.autor__avatar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid var(--red);
+  opacity: 0.3;
+}
+
+.autor .label { margin-bottom: 1rem; display: block; }
+
+.autor__name {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.autor__bio {
+  font-size: 1rem;
+  color: var(--white-dim);
+  line-height: 1.9;
+  max-width: 620px;
+}
+
+/* ═══════════════════════════════════
+   OFERTA
+═══════════════════════════════════ */
+.oferta {
+  padding: 7rem 0;
+  background:
+    radial-gradient(ellipse 70% 80% at 50% 30%, rgba(142,29,26,0.12) 0%, transparent 60%),
+    var(--black);
+  border-top: 1px solid var(--border);
+}
+
+.oferta__header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.oferta__header .label { margin-bottom: 1.2rem; display: block; }
+
+.oferta__card {
+  max-width: 680px;
+  margin: 0 auto;
+  border: 1px solid rgba(214,69,61,0.3);
+  background: rgba(142,29,26,0.05);
+  padding: clamp(2rem, 5vw, 3.5rem);
+  position: relative;
+}
+
+.oferta__card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--red), var(--red-light), var(--red));
+}
+
+.oferta__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--red);
+  padding: 0.4rem 1rem;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+.oferta__title {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.oferta__subtitle {
+  font-style: italic;
+  color: var(--ice-dim);
+  font-size: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.oferta__includes {
+  margin-bottom: 2.5rem;
+}
+
+.oferta__include-title {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--grey-light);
+  margin-bottom: 1.25rem;
+}
+
+.oferta__include-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.oferta__include-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.95rem;
+  color: var(--white-dim);
+}
+
+.oferta__include-icon {
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 0.9rem;
+}
+
+.oferta__benefits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.oferta__benefit {
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--border);
+  font-size: 0.78rem;
+  color: var(--white-muted);
+  letter-spacing: 0.05em;
+}
+
+.oferta__price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.oferta__price-amount {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: 3.5rem;
+  color: var(--white);
+  letter-spacing: -0.02em;
+}
+
+.oferta__price-currency {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--white-dim);
+}
+
+.oferta__price-note {
+  font-size: 0.82rem;
+  color: var(--white-muted);
+}
+
+.oferta__cta { width: 100%; justify-content: center; }
+
+
+
+.oferta__secure {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  font-size: 0.78rem;
+  color: var(--white-muted);
+}
+
+/* ═══════════════════════════════════
+   FAQ
+═══════════════════════════════════ */
+.faq {
+  padding: 7rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.faq__header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.faq__header .label { margin-bottom: 1.2rem; display: block; }
+
+.faq__list {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.faq__item {
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.faq__question {
+  width: 100%;
+  background: none;
+  border: none;
+  color: var(--white);
+  text-align: left;
+  padding: 1.75rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  cursor: pointer;
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+  transition: color 0.3s;
+}
+
+.faq__question:hover { color: var(--red-light); }
+
+.faq__icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  position: relative;
+  border: 1px solid var(--grey);
+  border-radius: 50%;
+}
+
+.faq__icon::before,
+.faq__icon::after {
+  content: '';
+  position: absolute;
+  background: var(--white);
+  transition: transform 0.3s var(--ease), opacity 0.3s;
+}
+
+.faq__icon::before {
+  width: 8px; height: 1px;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.faq__icon::after {
+  width: 1px; height: 8px;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.faq__item.open .faq__icon::after { transform: translate(-50%, -50%) rotate(90deg); opacity: 0; }
+.faq__item.open .faq__question { color: var(--red-light); }
+
+.faq__answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s var(--ease);
+}
+
+.faq__answer-inner {
+  padding-bottom: 1.75rem;
+  font-size: 0.9rem;
+  color: var(--white-muted);
+  line-height: 1.8;
+}
+
+/* ═══════════════════════════════════
+   CTA FINAL
+═══════════════════════════════════ */
+.cta-final {
+  padding: 9rem 0;
+  text-align: center;
+  position: relative;
+  background:
+    radial-gradient(ellipse 80% 70% at 50% 50%, rgba(142,29,26,0.15) 0%, transparent 65%),
+    var(--black);
+  border-top: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.cta-final__bg-spiral {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(700px, 120vw);
+  opacity: 0.03;
+  pointer-events: none;
+}
+
+.cta-final__content { position: relative; z-index: 1; }
+.cta-final .label { margin-bottom: 2rem; display: block; }
+
+.cta-final__headline {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: clamp(2rem, 6vw, 5rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin-bottom: 3rem;
+}
+
+.cta-final__headline .fire { color: var(--red-light); }
+.cta-final__headline .ice  { color: var(--ice-dim); }
+
+.cta-final__sub {
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  color: var(--white-dim);
+  margin-bottom: 3rem;
+  max-width: 540px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.8;
+}
+
+/* ═══════════════════════════════════
+   FOOTER
+═══════════════════════════════════ */
+.footer {
+  padding: 2.5rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.footer__copy {
+  font-size: 0.8rem;
+  color: var(--white-muted);
+}
+
+.footer__links {
+  display: flex;
+  gap: 2rem;
+}
+
+.footer__link {
+  font-size: 0.8rem;
+  color: var(--white-muted);
+  transition: color 0.3s;
+}
+
+.footer__link:hover { color: var(--white); }
+
+/* ═══════════════════════════════════
+   ANIMATIONS
+═══════════════════════════════════ */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-up-delay-1 { transition-delay: 0.1s; }
+.fade-up-delay-2 { transition-delay: 0.2s; }
+.fade-up-delay-3 { transition-delay: 0.3s; }
+.fade-up-delay-4 { transition-delay: 0.4s; }
+.fade-up-delay-5 { transition-delay: 0.5s; }
+
+/* ═══════════════════════════════════
+   UTILITIES
+═══════════════════════════════════ */
+.text-center { text-align: center; }
+.text-fire { color: var(--red-light); }
+.text-ice  { color: var(--ice-dim); }
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+.mt-4 { margin-top: 2rem; }
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+.mb-4 { margin-bottom: 2rem; }
+
+/* ═══════════════════════════════════
+   SCROLLBAR
+═══════════════════════════════════ */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-thumb { background: var(--red); }
+
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav class="nav" id="nav" role="navigation" aria-label="Navegación principal">
+  <div class="container">
+    <div class="nav__inner">
+      <a href="#" class="nav__logo" aria-label="Ni Frío Ni Fuego">
+        <span class="nav__logo-fire">NI FRÍO</span>
+        <span style="color:var(--grey);font-weight:300;">·</span>
+        <span class="nav__logo-ice">NI FUEGO</span>
+      </a>
+        <a href="./gracias.html" class="btn btn--primary nav__cta" aria-label="Obtener el libro" target="_blank">
+    <span>OBTENER EL LIBRO</span>
+</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="hero" aria-labelledby="hero-headline">
+  <div class="container">
+    <div class="hero__grid">
+
+      <div class="hero__content">
+        <div class="hero__eyebrow fade-up">
+          <div class="hero__eyebrow-line"></div>
+          <span class="label">Alexis Jaramillo · 2026</span>
+        </div>
+
+        <h1 class="hero__headline fade-up fade-up-delay-1" id="hero-headline">
+          ¿Qué pasaría si gran parte del
+          <em>sufrimiento humano</em>
+          naciera de una mentira que llevamos siglos repitiendo?
+        </h1>
+
+        <p class="hero__sub fade-up fade-up-delay-2">
+          La mentira de que debemos elegir entre la razón y la emoción.
+        </p>
+
+        <p class="hero__text fade-up fade-up-delay-3">
+          <em>Ni Frío Ni Fuego</em> es una exploración profunda sobre el conflicto interior que surge cuando separamos dos fuerzas que nunca debieron estar enfrentadas.
+        </p>
+
+        <div class="hero__cta-group fade-up fade-up-delay-4">
+          <a href="https://mpago.li/34eKFh7" target="_blank" class="btn btn--primary" aria-label="Quiero leer Ni Frío Ni Fuego">
+  <span>QUIERO LEER NI FRÍO NI FUEGO</span>
+  <svg class="btn-arrow" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+    ...
+  </svg>
+</a>
+        </div>
+
+        <p class="hero__note fade-up fade-up-delay-5" style="margin-top:1.5rem;">
+          PDF · EPUB · Acceso inmediato
+        </p>
+      </div>
+
+      <div class="hero__book fade-up fade-up-delay-2">
+        <div class="book-mockup">
+          <img
+            src="./portada-libro.jpg"
+            alt="Portada del libro Ni Frío Ni Fuego de Alexis Jaramillo"
+            class="book-mockup__img"
+            width="280"
+            height="420"
+            loading="eager"
+          />
+          <div class="book-mockup__glow" aria-hidden="true"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ VSL ═══ -->
+<section class="vsl" id="vsl" aria-labelledby="vsl-title">
+  <div class="container">
+    <div class="vsl__header container--narrow">
+      <span class="label">Mira antes de leer</span>
+      <h2 class="heading-lg mt-3" id="vsl-title">
+        Dos minutos que cambian<br/>la pregunta
+      </h2>
+    </div>
+
+    <div class="vsl__wrapper">
+
+    <div class="vsl__frame" role="region" aria-label="Video presentación del libro">
+
+        <iframe
+            src="https://www.youtube.com/embed/k3Ad2LRVgws"
+            title="Ni Frío Ni Fuego - Presentación"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+        </iframe>
+
+        <div class="vsl__corners" aria-hidden="true">
+            <div class="vsl__corner vsl__corner--tl"></div>
+            <div class="vsl__corner vsl__corner--tr"></div>
+            <div class="vsl__corner vsl__corner--bl"></div>
+            <div class="vsl__corner vsl__corner--br"></div>
+        </div>
+
+    </div>
+
+</div>
+
+  </div>
+      <div class="vsl__corners" aria-hidden="true">
+        <div class="vsl__corner vsl__corner--tl"></div>
+        <div class="vsl__corner vsl__corner--tr"></div>
+        <div class="vsl__corner vsl__corner--bl"></div>
+        <div class="vsl__corner vsl__corner--br"></div>
+      </div>
+    </div>
+
+    <div class="vsl__cta">
+<a href="https://mpago.li/34eKFh7" class="btn btn--primary" aria-label="Quiero leer Ni Frío Ni Fuego" target="_blank">
+  <span>QUIERO LEER NI FRÍO NI FUEGO</span>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ EL PROBLEMA ═══ -->
+<section class="problema" id="problema" aria-labelledby="problema-title">
+  <div class="container">
+
+    <div class="problema__header container--narrow fade-up">
+      <span class="label">El problema</span>
+      <h2 class="heading-lg mt-3" id="problema-title">
+        La guerra más agotadora<br/>no ocurre fuera de ti.
+      </h2>
+      <p class="body-lg mt-4">
+        Ocurre entre dos fuerzas internas que llevan siglos enfrentadas. Y nadie te enseñó a reconciliarlas.
+      </p>
+    </div>
+
+    <div class="problema__grid">
+
+      <article class="problema__item fade-up">
+        <div class="problema__num">01</div>
+        <span class="problema__icon" aria-hidden="true">🌀</span>
+        <h3 class="problema__title">Sobrepensar</h3>
+        <p class="problema__desc">Analizas cada decisión hasta el agotamiento. La razón sin ancla emocional se convierte en un laberinto sin salida.</p>
+      </article>
+
+      <article class="problema__item fade-up fade-up-delay-1">
+        <div class="problema__num">02</div>
+        <span class="problema__icon" aria-hidden="true">⚡</span>
+        <h3 class="problema__title">Reacciones impulsivas</h3>
+        <p class="problema__desc">Actúas antes de pensar. La emoción sin dirección racional es energía sin motor que consume todo lo que toca.</p>
+      </article>
+
+      <article class="problema__item fade-up fade-up-delay-2">
+        <div class="problema__num">03</div>
+        <span class="problema__icon" aria-hidden="true">🌫</span>
+        <h3 class="problema__title">Confusión crónica</h3>
+        <p class="problema__desc">Sientes algo pero no sabes qué. Sabes algo pero no puedes sentirlo. La brecha entre mente y corazón genera una niebla permanente.</p>
+      </article>
+
+      <article class="problema__item fade-up">
+        <div class="problema__num">04</div>
+        <span class="problema__icon" aria-hidden="true">⚖</span>
+        <h3 class="problema__title">Duda constante</h3>
+        <p class="problema__desc">Nunca sabes si confiar en tu cabeza o en tu corazón. Cada decisión importante se convierte en un interrogatorio interno interminable.</p>
+      </article>
+
+      <article class="problema__item fade-up fade-up-delay-1">
+        <div class="problema__num">05</div>
+        <span class="problema__icon" aria-hidden="true">🔥</span>
+        <h3 class="problema__title">Conflicto interior</h3>
+        <p class="problema__desc">Sabes lo que debes hacer pero no puedes hacerlo. Sientes lo que quieres pero no sabes cómo pedirlo. Dos mentes en guerra constante.</p>
+      </article>
+
+      <article class="problema__item fade-up fade-up-delay-2">
+        <div class="problema__num">06</div>
+        <span class="problema__icon" aria-hidden="true">🪤</span>
+        <h3 class="problema__title">Vacío inexplicable</h3>
+        <p class="problema__desc">Lo tienes todo en papel, pero falta algo. Ese vacío tiene un nombre: es la distancia entre quien eres y quien podrías ser si integraras ambas fuerzas.</p>
+      </article>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ REVELACIÓN ═══ -->
+<section class="revelacion" id="revelacion" aria-labelledby="revelacion-title">
+
+  <!-- Background spiral SVG -->
+  <svg class="revelacion__spiral" viewBox="0 0 500 500" fill="none" aria-hidden="true">
+    <g stroke="white" stroke-width="0.5">
+      <path d="M250 250 Q 320 180, 380 250 Q 320 320, 250 350 Q 150 320, 120 250 Q 150 150, 250 130 Q 380 140, 420 250 Q 380 390, 250 420 Q 80 390, 60 250 Q 80 90, 250 80"/>
+      <ellipse cx="250" cy="250" rx="160" ry="100" transform="rotate(30 250 250)"/>
+      <ellipse cx="250" cy="250" rx="120" ry="70" transform="rotate(60 250 250)"/>
+      <ellipse cx="250" cy="250" rx="80" ry="45" transform="rotate(90 250 250)"/>
+      <ellipse cx="250" cy="250" rx="50" ry="28" transform="rotate(120 250 250)"/>
+    </g>
+  </svg>
+
+  <div class="container--narrow revelacion__content">
+    <span class="label fade-up">La revelación central</span>
+
+    <h2 class="revelacion__title mt-3 fade-up fade-up-delay-1" id="revelacion-title">
+      El conflicto nunca fue<br/>
+      entre la <span class="fire">razón</span><br/>
+      y la <span class="ice">emoción</span>.
+    </h2>
+
+    <div class="revelacion__divider fade-up fade-up-delay-2" aria-hidden="true"></div>
+
+    <p class="revelacion__body fade-up fade-up-delay-2">
+      Fue entre una civilización que puso a dos aliados a pelear. La neurociencia lo confirma: la razón no puede funcionar sin la emoción. La emoción no puede dirigirse sin la razón. Son co-dependientes por diseño evolutivo, construidos para trabajar juntos durante millones de años.
+    </p>
+
+    <blockquote class="revelacion__quote fade-up fade-up-delay-3">
+      "La plenitud no es el premio de quien tiene más razón ni de quien siente más profundo. Es el fruto natural de quien aprendió a hacer las dos cosas al mismo tiempo."
+      <cite style="display:block;margin-top:1rem;font-size:0.82rem;color:var(--grey-light);font-style:normal;">— Ni Frío Ni Fuego</cite>
+    </blockquote>
+
+    <p class="revelacion__body fade-up fade-up-delay-3">
+      Vivir dividido tiene un precio concreto: relaciones superficiales, decisiones que duelen, un éxito que se siente vacío, un corazón que no puede articularse. El punto de encuentro entre razón y emoción tiene otro nombre: <strong style="color:var(--white);">plenitud</strong>.
+    </p>
+
+  </div>
+</section>
+
+<!-- ═══ QUÉ DESCUBRIRÁS ═══ -->
+<section class="descubriras" id="descubriras" aria-labelledby="descubriras-title">
+  <div class="container">
+
+    <div class="descubriras__header container--narrow fade-up">
+      <span class="label">Lo que contiene el libro</span>
+      <h2 class="heading-lg mt-3" id="descubriras-title">Qué descubrirás</h2>
+      <p class="body-lg mt-3">12 capítulos construidos para entender, sentir y aplicar la integración desde el primer día.</p>
+    </div>
+
+    <div class="descubriras__grid">
+
+      <article class="discover-card fade-up">
+        <p class="discover-card__num">CAP. 01</p>
+        <h3 class="discover-card__title">Por qué creemos que razón y emoción son opuestos</h3>
+        <p class="discover-card__desc">El origen cultural e histórico del malentendido. Desde Platón hasta la Revolución Industrial, cómo construimos la guerra que hoy nos agota.</p>
+      </article>
+
+      <article class="discover-card fade-up fade-up-delay-1">
+        <p class="discover-card__num">CAP. 02</p>
+        <h3 class="discover-card__title">Cómo nace el conflicto interior</h3>
+        <p class="discover-card__desc">La anatomía neurológica de tus dos mentes. Por qué el 95% de tus decisiones no son tuyas en el sentido que crees.</p>
+      </article>
+
+      <article class="discover-card fade-up fade-up-delay-2">
+        <p class="discover-card__num">CAP. 03–04</p>
+        <h3 class="discover-card__title">Qué son realmente las emociones y la razón</h3>
+        <p class="discover-card__desc">No son lo que te enseñaron. Las emociones son información. La razón es un arte. Ninguna es superior. Las dos son necesarias.</p>
+      </article>
+
+      <article class="discover-card fade-up">
+        <p class="discover-card__num">CAP. 05–06</p>
+        <h3 class="discover-card__title">Qué significa vivir integrado</h3>
+        <p class="discover-card__desc">Las tres dimensiones de la plenitud y el precio concreto que pagas cuando vives en un solo extremo. Éxito vacío, relaciones superficiales, crisis tardías.</p>
+      </article>
+
+      <article class="discover-card fade-up fade-up-delay-1">
+        <p class="discover-card__num">CAP. 07–08</p>
+        <h3 class="discover-card__title">Cómo desarrollar Inteligencia Integradora</h3>
+        <p class="discover-card__desc">Las cinco capacidades que nadie te enseñó. El método de los tres tiempos para tomar decisiones que honren tanto tu razón como tu emoción.</p>
+      </article>
+
+      <article class="discover-card fade-up fade-up-delay-2">
+        <p class="discover-card__num">CAP. 09–12</p>
+        <h3 class="discover-card__title">Aplicación en relaciones, trabajo y vida cotidiana</h3>
+        <p class="discover-card__desc">Prácticas concretas. Ejercicios reales. El punto donde todo se funde. La versión de ti que existe cuando dejas de elegir.</p>
+      </article>
+
+    </div>
+
+    <div class="text-center mt-4" style="padding-top:3rem;">
+  <a href="https://mpago.li/34eKFh7"
+     target="_blank"
+     class="btn btn--primary">
+    <span>QUIERO ESTE LIBRO</span>
+  </a>
+</div>
+
+  </div>
+</section>
+
+<!-- ═══ PARA QUIÉN ES ═══ -->
+<section class="para-quien" id="para-quien" aria-labelledby="para-quien-title">
+  <div class="container">
+    <div class="para-quien__inner">
+
+      <div>
+        <span class="label fade-up">Para quién es</span>
+        <h2 class="heading-lg mt-3 fade-up fade-up-delay-1" id="para-quien-title">
+          Este libro es para ti si…
+        </h2>
+
+        <ul class="para-quien__list" role="list">
+
+          <li class="para-quien__item fade-up">
+            <div class="para-quien__check" aria-hidden="true">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                <path d="M2 5l2.5 2.5L8 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <p class="para-quien__text"><strong>Piensas demasiado.</strong> Tu mente no para, analiza en bucle y aun así no llega a conclusiones que se sientan correctas.</p>
+          </li>
+
+          <li class="para-quien__item fade-up fade-up-delay-1">
+            <div class="para-quien__check" aria-hidden="true">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                <path d="M2 5l2.5 2.5L8 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <p class="para-quien__text"><strong>Te sientes dividido.</strong> Hay una brecha entre lo que sabes y lo que sientes, entre lo que quieres y lo que haces.</p>
+          </li>
+
+          <li class="para-quien__item fade-up fade-up-delay-2">
+            <div class="para-quien__check" aria-hidden="true">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                <path d="M2 5l2.5 2.5L8 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <p class="para-quien__text"><strong>Buscas claridad real.</strong> No motivación de corto plazo. Comprensión profunda de cómo funciona tu propia mente.</p>
+          </li>
+
+          <li class="para-quien__item fade-up fade-up-delay-3">
+            <div class="para-quien__check" aria-hidden="true">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                <path d="M2 5l2.5 2.5L8 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <p class="para-quien__text"><strong>Deseas comprenderte mejor.</strong> Entender por qué reaccionas como reaccionas, por qué decides como decides.</p>
+          </li>
+
+          <li class="para-quien__item fade-up fade-up-delay-4">
+            <div class="para-quien__check" aria-hidden="true">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                <path d="M2 5l2.5 2.5L8 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <p class="para-quien__text"><strong>Quieres decisiones más coherentes.</strong> Que honren tanto lo que piensas como lo que sientes. Sin suprimir ninguna de las dos voces.</p>
+          </li>
+
+        </ul>
+      </div>
+
+      <div class="para-quien__visual fade-up fade-up-delay-2" aria-hidden="true">
+        <svg class="spiral-visual" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="spiralGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#D7F3F5" stop-opacity="0.8"/>
+              <stop offset="50%" stop-color="#8E1D1A" stop-opacity="0.6"/>
+              <stop offset="100%" stop-color="#D7F3F5" stop-opacity="0.2"/>
+            </linearGradient>
+          </defs>
+          <g stroke="url(#spiralGrad)" stroke-width="0.8" fill="none" opacity="0.7">
+            <ellipse cx="200" cy="200" rx="170" ry="105" transform="rotate(0 200 200)"/>
+            <ellipse cx="200" cy="200" rx="155" ry="95" transform="rotate(15 200 200)"/>
+            <ellipse cx="200" cy="200" rx="140" ry="85" transform="rotate(30 200 200)"/>
+            <ellipse cx="200" cy="200" rx="125" ry="75" transform="rotate(45 200 200)"/>
+            <ellipse cx="200" cy="200" rx="110" ry="65" transform="rotate(60 200 200)"/>
+            <ellipse cx="200" cy="200" rx="95" ry="57" transform="rotate(75 200 200)"/>
+            <ellipse cx="200" cy="200" rx="82" ry="49" transform="rotate(90 200 200)"/>
+            <ellipse cx="200" cy="200" rx="69" ry="41" transform="rotate(105 200 200)"/>
+            <ellipse cx="200" cy="200" rx="57" ry="33" transform="rotate(120 200 200)"/>
+            <ellipse cx="200" cy="200" rx="46" ry="27" transform="rotate(135 200 200)"/>
+            <ellipse cx="200" cy="200" rx="36" ry="21" transform="rotate(150 200 200)"/>
+            <ellipse cx="200" cy="200" rx="27" ry="16" transform="rotate(165 200 200)"/>
+            <ellipse cx="200" cy="200" rx="19" ry="11" transform="rotate(180 200 200)"/>
+            <ellipse cx="200" cy="200" rx="12" ry="7" transform="rotate(195 200 200)"/>
+          </g>
+        </svg>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ AUTOR ═══ -->
+<section class="autor" id="autor" aria-labelledby="autor-title">
+  <div class="container">
+    <div class="autor__inner">
+
+      
+
+      <div>
+        <span class="label fade-up">El autor</span>
+        <h2 class="autor__name fade-up fade-up-delay-1" id="autor-title">Alexis Jaramillo</h2>
+        <p class="autor__bio fade-up fade-up-delay-2">
+          Explorador de la experiencia humana, interesado en la intersección entre filosofía práctica, neurociencia y emoción. Ni Frío Ni Fuego nació de una pregunta que parecía resistirse a toda respuesta: ¿por qué tantas personas brillantes o profundamente sensibles viven con la sensación persistente de que algo les falta?
+
+        </p>
+        <p class="autor__bio fade-up fade-up-delay-3" style="margin-top:1rem;">
+          La respuesta que encontró, después de años de exploración e investigación, fue siempre la misma: porque viven en un extremo. Porque eligieron un lado. Este libro es el resultado de esa búsqueda.
+        </p>
+
+        <div class="autor__firma fade-up fade-up-delay-4">
+    <img src="firma.png" alt="Firma Alexis Jaramillo">
+</div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ OFERTA ═══ -->
+<section class="oferta" id="oferta" aria-labelledby="oferta-title">
+  <div class="container">
+
+    <div class="oferta__header container--narrow fade-up">
+      <span class="label">Acceso completo</span>
+      <h2 class="heading-lg mt-3" id="oferta-title">
+        Todo lo que necesitas<br/>para empezar hoy.
+      </h2>
+    </div>
+
+    <div class="oferta__card fade-up fade-up-delay-1">
+
+      <div class="oferta__badge">
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor" aria-hidden="true">
+          <circle cx="5" cy="5" r="4"/>
+        </svg>
+        Disponible ahora mismo
+      </div>
+
+      <h3 class="oferta__title" id="oferta-product-title">NI FRÍO NI FUEGO</h3>
+      <p class="oferta__subtitle">Comprender la razón y la emoción para alcanzar la plenitud</p>
+
+      <div class="oferta__includes">
+        <p class="oferta__include-title">Incluye:</p>
+        <ul class="oferta__include-list" role="list">
+          <li class="oferta__include-item">
+            <div class="oferta__include-icon" aria-hidden="true">📄</div>
+            <span><strong style="color:var(--white);">Libro PDF</strong> — Listo para imprimir o leer en pantalla</span>
+          </li>
+          <li class="oferta__include-item">
+            <div class="oferta__include-icon" aria-hidden="true">📱</div>
+            <span><strong style="color:var(--white);">Libro EPUB</strong> — Compatible con Kindle, Apple Books, Kobo y más</span>
+          </li>
+          <li class="oferta__include-item">
+            <div class="oferta__include-icon" aria-hidden="true">🌐</div>
+            <span><strong style="color:var(--white);">Biblioteca Online</strong> — Acceso desde el navegador, sin descarga</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="oferta__benefits" role="list">
+        <span class="oferta__benefit" role="listitem">⚡ Acceso inmediato</span>
+        <span class="oferta__benefit" role="listitem">📲 Cualquier dispositivo</span>
+        <span class="oferta__benefit" role="listitem">♾ Descarga permanente</span>
+        <span class="oferta__benefit" role="listitem">🔒 Pago seguro</span>
+      </div>
+
+      <div class="oferta__price">
+        <span class="oferta__price-currency" aria-hidden="true">USD</span>
+        <span class="oferta__price-amount" id="price-display">24.99</span>
+        <span class="oferta__price-note">Precio de lanzamiento · Pago único</span>
+      </div>
+
+      
+      </div>
+
+      <button
+        class="btn btn--primary oferta__cta"
+        id="checkout-btn"
+        onclick="handleCheckout()"
+        aria-label="Obtener Ni Frío Ni Fuego por USD 19"
+        data-price="19"
+        data-product="ni-frio-ni-fuego"
+      >
+        <span>QUIERO LEER NI FRÍO NI FUEGO</span>
+        <svg class="btn-arrow" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M3 9h12M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <div class="oferta__secure" role="note">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <rect x="1" y="6" width="12" height="7" rx="1" stroke="currentColor" stroke-width="1.2"/>
+          <path d="M4 6V4.5a3 3 0 0 1 6 0V6" stroke="currentColor" stroke-width="1.2"/>
+        </svg>
+Pago seguro con Mercado Pago • Acceso inmediato • Biblioteca privada online      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ FAQ ═══ -->
+<section class="faq" id="faq" aria-labelledby="faq-title">
+  <div class="container">
+
+    <div class="faq__header fade-up">
+      <span class="label">Preguntas frecuentes</span>
+      <h2 class="heading-lg mt-3" id="faq-title">¿Tienes dudas?</h2>
+    </div>
+
+    <ul class="faq__list fade-up fade-up-delay-1" role="list">
+
+      <li class="faq__item" role="listitem">
+        <button class="faq__question" aria-expanded="false" aria-controls="faq-1">
+          ¿Cómo recibo el acceso?
+          <span class="faq__icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq__answer" id="faq-1" role="region">
+          <div class="faq__answer-inner">
+            Al completar tu compra, recibirás un correo con el enlace de descarga y acceso a la biblioteca online. El proceso es automático e inmediato, sin esperas.
+          </div>
+        </div>
+      </li>
+
+      <li class="faq__item" role="listitem">
+        <button class="faq__question" aria-expanded="false" aria-controls="faq-2">
+          ¿Es un libro físico?
+          <span class="faq__icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq__answer" id="faq-2" role="region">
+          <div class="faq__answer-inner">
+            No. <em>Ni Frío Ni Fuego</em> es un libro digital disponible en formato PDF y EPUB. Esto te permite acceder a él desde cualquier dispositivo de manera inmediata, sin costos de envío ni tiempos de espera.
+          </div>
+        </div>
+      </li>
+
+      <li class="faq__item" role="listitem">
+        <button class="faq__question" aria-expanded="false" aria-controls="faq-3">
+          ¿Puedo descargarlo?
+          <span class="faq__icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq__answer" id="faq-3" role="region">
+          <div class="faq__answer-inner">
+            Sí. Recibirás los archivos PDF y EPUB para descargar y conservar permanentemente en tus dispositivos. La descarga no tiene fecha de expiración.
+          </div>
+        </div>
+      </li>
+
+      <li class="faq__item" role="listitem">
+        <button class="faq__question" aria-expanded="false" aria-controls="faq-4">
+          ¿Funciona en móvil?
+          <span class="faq__icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq__answer" id="faq-4" role="region">
+          <div class="faq__answer-inner">
+            Completamente. El formato EPUB está optimizado para lectores móviles como Apple Books (iOS) y aplicaciones Android. El PDF también es legible en pantallas pequeñas. Además, la biblioteca online funciona perfectamente en cualquier navegador móvil.
+          </div>
+        </div>
+      </li>
+
+      <li class="faq__item" role="listitem">
+        <button class="faq__question" aria-expanded="false" aria-controls="faq-5">
+          ¿El acceso expira?
+          <span class="faq__icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq__answer" id="faq-5" role="region">
+          <div class="faq__answer-inner">
+            No. Una vez que compras, el acceso y los archivos son tuyos para siempre. No hay suscripciones, no hay renovaciones. Pago único, acceso permanente.
+          </div>
+        </div>
+      </li>
+
+    </ul>
+
+  </div>
+</section>
+
+<!-- ═══ CTA FINAL ═══ -->
+<section class="cta-final" id="cta-final" aria-labelledby="cta-final-title">
+
+  <svg class="cta-final__bg-spiral" viewBox="0 0 500 500" fill="none" aria-hidden="true">
+    <g stroke="white" stroke-width="0.6">
+      <ellipse cx="250" cy="250" rx="220" ry="135" transform="rotate(0 250 250)"/>
+      <ellipse cx="250" cy="250" rx="195" ry="119" transform="rotate(18 250 250)"/>
+      <ellipse cx="250" cy="250" rx="170" ry="103" transform="rotate(36 250 250)"/>
+      <ellipse cx="250" cy="250" rx="148" ry="89" transform="rotate(54 250 250)"/>
+      <ellipse cx="250" cy="250" rx="128" ry="77" transform="rotate(72 250 250)"/>
+      <ellipse cx="250" cy="250" rx="110" ry="66" transform="rotate(90 250 250)"/>
+      <ellipse cx="250" cy="250" rx="93" ry="56" transform="rotate(108 250 250)"/>
+      <ellipse cx="250" cy="250" rx="78" ry="47" transform="rotate(126 250 250)"/>
+      <ellipse cx="250" cy="250" rx="64" ry="38" transform="rotate(144 250 250)"/>
+      <ellipse cx="250" cy="250" rx="52" ry="31" transform="rotate(162 250 250)"/>
+      <ellipse cx="250" cy="250" rx="41" ry="24" transform="rotate(180 250 250)"/>
+    </g>
+  </svg>
+
+  <div class="container--narrow cta-final__content">
+    <span class="label fade-up">El siguiente paso</span>
+
+    <h2 class="cta-final__headline mt-3 fade-up fade-up-delay-1" id="cta-final-title">
+      La <span class="fire">división</span><br/>
+      era el problema.<br/>
+      La <span class="ice">integración</span><br/>
+      puede ser la respuesta.
+    </h2>
+
+    <p class="cta-final__sub fade-up fade-up-delay-2">
+      No tienes que seguir eligiendo entre lo que piensas y lo que sientes. La plenitud vive exactamente en el punto donde los dos se encuentran.
+    </p>
+
+    <div class="fade-up fade-up-delay-3">
+      <a href="https://mpago.li/34eKFh7"
+   target="_blank"
+   class="btn btn--primary"
+   style="padding:1.3rem 3.5rem;"
+   aria-label="Quiero leer Ni Frío Ni Fuego">
+        <span>QUIERO LEER NI FRÍO NI FUEGO</span>
+        <svg class="btn-arrow" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M3 9h12M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+
+    <p class="body-sm mt-4 fade-up fade-up-delay-4" style="margin-top:2rem;">
+      PDF • EPUB • Biblioteca privada Online • Acceso inmediato • USD 24.99
+    </p>
+
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer__inner">
+      <p class="footer__copy">
+        © 2026 Alexis Jaramillo · <em>Ni Frío Ni Fuego</em> · Todos los derechos reservados.
+      </p>
+      <nav class="footer__links" aria-label="Navegación del pie de página">
+        <a href="#" class="footer__link">Privacidad</a>
+        <a href="#" class="footer__link">Términos</a>
+        <a href="mailto:tucorreo@email.com" class="footer__link">Contacto</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════
+   JAVASCRIPT
+═══════════════════════════════════ -->
+<script>
+/* ── Nav scroll ── */
+const nav = document.getElementById('nav');
+const onScroll = () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+};
+window.addEventListener('scroll', onScroll, { passive: true });
+
+/* ── Intersection Observer (fade-up) ── */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+/* ── FAQ accordion ── */
+document.querySelectorAll('.faq__question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item   = btn.closest('.faq__item');
+    const answer = item.querySelector('.faq__answer');
+    const isOpen = item.classList.contains('open');
+
+    document.querySelectorAll('.faq__item.open').forEach(open => {
+      open.classList.remove('open');
+      open.querySelector('.faq__answer').style.maxHeight = null;
+      open.querySelector('.faq__question').setAttribute('aria-expanded', 'false');
+    });
+
+    if (!isOpen) {
+      item.classList.add('open');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  });
+});
+
+/* ── VSL Placeholder click ── */
+const vslPlaceholder = document.getElementById('vsl-placeholder');
+if (vslPlaceholder) {
+  vslPlaceholder.addEventListener('click', () => {
+    /* Reemplaza TU_VIDEO_ID con el ID real de Vimeo */
+    const vimeoId = 'TU_VIDEO_ID';
+    const frame   = vslPlaceholder.closest('.vsl__frame');
+    const iframe  = document.createElement('iframe');
+    iframe.src = `https://player.vimeo.com/video/${vimeoId}?autoplay=1&title=0&byline=0&portrait=0`;
+    iframe.setAttribute('allowfullscreen', '');
+    iframe.setAttribute('allow', 'autoplay; fullscreen; picture-in-picture');
+    iframe.setAttribute('title', 'Presentación: Ni Frío Ni Fuego');
+    frame.innerHTML = '';
+    frame.appendChild(iframe);
+  });
+  vslPlaceholder.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') vslPlaceholder.click();
+  });
+}
+
+/* ── Smooth scroll for anchor links ── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      const offset = nav.offsetHeight + 16;
+      const top    = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  });
+});
+
+/* Checkout Mercado Pago */
+
+
+function handleCheckout() {
+  /* Checkout Mercado Pago */
+
+function handleCheckout() {
+  window.open('https://mpago.li/34eKFh7', '_blank');
+}
+  window.open('https://mpago.li/34eKFh7', '_blank');
+}
+
+/* ── Spiral animation subtle rotation ── */
+const spirals = document.querySelectorAll('.revelacion__spiral, .cta-final__bg-spiral');
+let angle = 0;
+const rotateSpiralSlowly = () => {
+  angle += 0.05;
+  spirals.forEach(s => {
+    s.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+  });
+  requestAnimationFrame(rotateSpiralSlowly);
+};
+rotateSpiralSlowly();
+
+/* ── Book parallax subtle ── */
+const bookImg = document.querySelector('.book-mockup__img');
+if (bookImg && window.matchMedia('(min-width: 900px)').matches) {
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY * 0.04;
+    bookImg.style.transform = `translateY(${-y}px)`;
+  }, { passive: true });
+}
+</script>
+
+</body>
+</html>

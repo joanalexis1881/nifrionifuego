@@ -1,0 +1,1885 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Biblioteca Privada — Ni Frío Ni Fuego · Alexis Jaramillo"/>
+<title>Biblioteca · Ni Frío Ni Fuego</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,300;1,400&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet"/>
+<link rel="icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   TOKENS & RESET
+═══════════════════════════════════════════════════════════════ */
+:root {
+  --black:        #0A0A0A;
+  --black-soft:   #111111;
+  --black-card:   #161616;
+  --red:          #8E1D1A;
+  --red-light:    #D6453D;
+  --ice:          #e5efef;
+  --ice-dim:      #9FB9D4;
+  --grey:         #6B6B6B;
+  --grey-light:   #A0A0A0;
+  --white:        #FFFFFF;
+  --white-dim:    rgba(255,255,255,0.75);
+  --white-muted:  rgba(255,255,255,0.45);
+  --white-faint:  rgba(255,255,255,0.12);
+  --border:       rgba(255,255,255,0.08);
+  --border-soft:  rgba(255,255,255,0.05);
+  --sidebar-w:    300px;
+  --ease:         cubic-bezier(0.25,0.46,0.45,0.94);
+  --font-head:    'Montserrat', sans-serif;
+  --font-body:    'Lora', Georgia, serif;
+}
+
+.theme-toggle{
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  padding: 0.55rem 1.1rem;
+
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 3px;
+
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+
+  color: var(--white-dim);
+  transition: all .25s;
+  transition: all .35s ease;
+}
+
+.theme-toggle:hover{
+  border-color: var(--red-light);
+  color: var(--white);
+  background: rgba(214,69,61,0.08);
+}
+
+body.light-theme {
+
+  --black: #f6f2eb;
+  --black-soft: #fdfaf5;
+  --black-card: #fffdf9;
+
+  --white: #111111;
+  --ice: #B8C9DA;
+
+  --white-dim: rgba(0,0,0,0.75);
+  --white-muted: rgba(0,0,0,0.55);
+  --white-faint: rgba(0,0,0,0.12);
+
+  --border: rgba(0,0,0,0.12);
+  --border-soft: rgba(0,0,0,0.08);
+
+}
+
+body.light-theme .reflexion__label{
+    color: #6E86A5;
+}
+
+body.light-theme .reflexion p{
+    color: #44566C;
+}
+body.light-theme .reflexion{
+    background: #F1EEE8;
+    border: 1px solid rgba(0,0,0,0.08);
+}
+
+/* ===== THEME TRANSITIONS ===== */
+
+.sidebar,
+.topbar,
+.main,
+.resources-btn,
+.theme-toggle,
+.chapter,
+.chapter-content,
+.chapter-header,
+.sidebar__nav,
+.sidebar__head,
+.sidebar__progress-bar,
+.sidebar__progress-fill,
+.nav-arrow,
+.modal,
+.modal-overlay {
+
+  transition:
+    background-color .45s cubic-bezier(0.25,0.46,0.45,0.94),
+    color .45s cubic-bezier(0.25,0.46,0.45,0.94),
+    border-color .45s cubic-bezier(0.25,0.46,0.45,0.94),
+    box-shadow .45s cubic-bezier(0.25,0.46,0.45,0.94);
+
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; height: 100%; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font-head);
+  font-weight: 300;
+  line-height: 1.75;
+  height: 100%;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+
+  transition:
+    background-color .45s cubic-bezier(0.25,0.46,0.45,0.94),
+    color .45s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+
+::selection { background: var(--red); color: var(--white); }
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { border: none; background: none; cursor: pointer; font-family: inherit; color: inherit; }
+
+/* ═══════════════════════════════════════════════════════════════
+   LAYOUT: TWO-COLUMN
+═══════════════════════════════════════════════════════════════ */
+.app {
+  display: flex;
+  height: 100vh;
+  position: relative;
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  width: var(--sidebar-w);
+  min-width: var(--sidebar-w);
+  height: 100vh;
+  background: var(--black-soft);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  z-index: 10;
+  transition: transform 0.35s var(--ease);
+}
+
+.sidebar__head {
+  padding: 2rem 1.5rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.sidebar__cover {
+  width: 80px;
+  height: 110px;
+  background: linear-gradient(135deg, var(--red) 0%, #3a0808 100%);
+  border-radius: 3px;
+  margin-bottom: 1.25rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+  flex-shrink: 0;
+}
+.sidebar__cover-image{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    z-index:10;
+}
+
+.sidebar__cover::before {
+  z-index: 20;
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(215,243,245,0.15) 0%, transparent 60%);
+}
+
+.sidebar__cover-text {
+  position: absolute;
+  bottom: 6px;
+  left: 6px;
+  right: 6px;
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: 0.45rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.3;
+}
+
+.sidebar__book-title {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1.3;
+  margin-bottom: 0.25rem;
+}
+
+.sidebar__author {
+  font-size: 0.72rem;
+  font-weight: 300;
+  color: var(--grey-light);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* Progress bar */
+.sidebar__progress-wrap {
+  margin-top: 1.25rem;
+}
+.sidebar__progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--grey-light);
+  margin-bottom: 0.5rem;
+}
+.sidebar__progress-label span { color: var(--red-light); }
+.sidebar__progress-bar {
+  height: 2px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.sidebar__progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--red), var(--red-light));
+  border-radius: 2px;
+  transition: width 0.5s var(--ease);
+  width: 0%;
+}
+
+/* NAV SCROLL AREA */
+.sidebar__nav {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem 0;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+.sidebar__nav::-webkit-scrollbar { width: 3px; }
+.sidebar__nav::-webkit-scrollbar-thumb { background: var(--border); }
+
+/* Continue reading */
+.sidebar__continue {
+  margin: 0 1rem 0.5rem;
+  padding: 0.6rem 0.85rem;
+  background: rgba(142,29,26,0.15);
+  border: 1px solid rgba(142,29,26,0.3);
+  border-radius: 3px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--red-light);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s;
+  display: none;
+}
+.sidebar__continue:hover { background: rgba(142,29,26,0.25); }
+.sidebar__continue svg { flex-shrink: 0; }
+
+/* NAV ITEMS */
+.nav-section {
+  padding: 0;
+}
+
+.nav-section__label {
+  padding: 1rem 1.5rem 0.4rem;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--grey);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-section__label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 1.5rem;
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: var(--white-muted);
+  cursor: pointer;
+  transition: all 0.2s;
+  border-left: 2px solid transparent;
+  line-height: 1.4;
+  position: relative;
+}
+
+.nav-item:hover { color: var(--white-dim); background: var(--white-faint); }
+
+.nav-item.active {
+  color: var(--white);
+  border-left-color: var(--red-light);
+  background: rgba(214,69,61,0.08);
+}
+
+.nav-item__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--grey);
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+
+.nav-item.active .nav-item__dot { background: var(--red-light); }
+
+/* ── MAIN READING AREA ── */
+.main {
+  flex: 1;
+  height: 100vh;
+  overflow-y: auto;
+  position: relative;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.1) transparent;
+}
+.main::-webkit-scrollbar { width: 4px; }
+.main::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); }
+
+/* ── TOP BAR ── */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2.5rem;
+  background: var(--black-soft);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  gap: 1rem;
+}
+
+.topbar__left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.hamburger {
+  display: none;
+  width: 36px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+.hamburger:hover { border-color: var(--white-muted); }
+.hamburger svg { pointer-events: none; }
+
+.topbar__chapter {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--grey-light);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.topbar__right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+/* NAV ARROWS */
+.nav-arrow {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--white-muted);
+  transition: all 0.2s;
+}
+.nav-arrow:hover { border-color: var(--white-muted); color: var(--white); }
+.nav-arrow:disabled, .nav-arrow[data-disabled="true"] { opacity: 0.3; pointer-events: none; }
+
+/* RESOURCES BUTTON */
+.resources-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.1rem;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 3px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--white-dim);
+  transition: all 0.25s;
+  position: relative;
+}
+.resources-btn:hover {
+  border-color: var(--white);
+  color: var(--white);
+}
+
+/* RESOURCES DROPDOWN */
+.resources-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 220px;
+  background: var(--black-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+  transition: all 0.2s var(--ease);
+  z-index: 100;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+}
+
+.resources-dropdown.open {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+
+.resources-item {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.9rem 1.25rem;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--white-dim);
+  transition: all 0.15s;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border-soft);
+}
+.resources-item:last-child { border-bottom: none; }
+.resources-item:hover { background: var(--white-faint); color: var(--white); }
+.resources-item.disabled { opacity: 0.4; cursor: default; }
+.resources-item.disabled:hover { background: transparent; color: var(--white-dim); }
+
+.resources-item__icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.resources-item__text { line-height: 1.3; }
+.resources-item__label { font-weight: 600; font-size: 0.78rem; }
+.resources-item__sub { font-size: 0.65rem; color: var(--grey-light); letter-spacing: 0.05em; margin-top: 0.1rem; }
+
+/* ══════════════════════════════════════
+   READING CONTENT AREA
+══════════════════════════════════════ */
+.reading-area {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 2rem 3rem 8rem;
+}
+
+/* Chapter header */
+.chapter-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+}
+
+.chapter-label {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 0.62rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--red-light);
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.chapter-title {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: clamp(1.6rem, 3vw, 2.6rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.chapter-subtitle {
+  font-family: var(--font-head);
+  font-weight: 300;
+  font-size: 1rem;
+  color: var(--white-muted);
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+}
+
+/* Reading typography */
+.reading-area p {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.9;
+  color: var(--white-dim);
+  margin-bottom: 1.75rem;
+  font-weight: 400;
+}
+
+.reading-area h2 {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--white);
+  margin: 3.5rem 0 1.25rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.reading-area h3 {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--red-light);
+  margin: 2.5rem 0 1rem;
+}
+
+.reading-area h4 {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 0.82rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--grey-light);
+  margin: 2rem 0 0.75rem;
+}
+
+.reading-area strong {
+  font-weight: 700;
+  color: var(--white);
+}
+
+.reading-area em {
+  font-style: italic;
+  color: var(--ice-dim);
+}
+
+body.light-theme .reading-area em {
+  color: #5F7898;
+}
+
+/* Blockquote */
+.reading-area blockquote {
+  border-left: 2px solid var(--red);
+  padding: 1.25rem 1.75rem;
+  margin: 2.5rem 0;
+  background: rgba(142,29,26,0.06);
+  border-radius: 0 3px 3px 0;
+}
+
+.reading-area blockquote p {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--white-dim);
+  margin: 0;
+}
+
+/* Reflexion box */
+.reflexion {
+  background: rgba(215,243,245,0.04);
+  border: 1px solid rgba(215,243,245,0.12);
+  border-radius: 4px;
+  padding: 1.75rem 2rem;
+  margin: 3rem 0;
+}
+
+.reflexion__label {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 0.62rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--white-dim);
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.reflexion p {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--white-dim); 
+  margin: 0;
+  line-height: 1.85;
+}
+
+/* LIST */
+.reading-area ul, .reading-area ol {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.9;
+  color: var(--white-dim);
+  margin: 1.5rem 0 1.75rem 1.5rem;
+}
+
+.reading-area li { margin-bottom: 0.6rem; }
+
+/* TABLE */
+.reading-area table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2.5rem 0;
+  font-size: 0.85rem;
+  font-family: var(--font-head);
+}
+
+.reading-area th {
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--red-light);
+  border-bottom: 1px solid var(--border);
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+.reading-area td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-soft);
+  color: var(--white-dim);
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+.reading-area tr:last-child td { border-bottom: none; }
+
+/* Section divider in text */
+.text-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 3rem 0;
+  color: var(--grey);
+  font-size: 0.7rem;
+}
+.text-divider::before, .text-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* MANIFESTO PRINCIPLES */
+.principles-list {
+  list-style: none;
+  margin: 2rem 0;
+  padding: 0;
+}
+
+.principles-list li {
+  font-family: var(--font-body) !important;
+  margin: 0 0 1.5rem !important;
+  padding: 1.25rem 1.5rem;
+  border-left: 2px solid var(--red);
+  background: rgba(142,29,26,0.04);
+  line-height: 1.8;
+}
+
+/* CHAPTER NAV FOOTER */
+.chapter-nav-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 1rem;
+  margin-top: 5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.chapter-nav-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.2s;
+  max-width: 48%;
+}
+
+.chapter-nav-btn:hover { border-color: rgba(255,255,255,0.2); background: var(--white-faint); }
+.chapter-nav-btn.right { text-align: right; }
+.chapter-nav-btn[data-disabled="true"] { opacity: 0.3; pointer-events: none; }
+
+.chapter-nav-btn__dir {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--grey-light);
+}
+
+.chapter-nav-btn__title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--white-dim);
+  line-height: 1.3;
+}
+
+/* ══════════════════════════════════════
+   MODAL
+══════════════════════════════════════ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(10px);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+
+.modal {
+  background: var(--black-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 3rem;
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+  transform: translateY(16px);
+  transition: transform 0.3s var(--ease);
+}
+
+.modal-overlay.open .modal { transform: translateY(0); }
+
+.modal__icon { font-size: 2.5rem; margin-bottom: 1.25rem; }
+
+.modal__title {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.modal__body {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.85;
+  color: var(--white-muted);
+  margin-bottom: 2rem;
+}
+
+.modal__close {
+  padding: 0.75rem 2rem;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--white-muted);
+  transition: all 0.2s;
+}
+.modal__close:hover { border-color: var(--white-muted); color: var(--white); }
+
+/* ══════════════════════════════════════
+   SIDEBAR OVERLAY (MOBILE)
+══════════════════════════════════════ */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 9;
+}
+
+/* ══════════════════════════════════════
+   SCROLL READING INDICATOR
+══════════════════════════════════════ */
+.reading-progress-line {
+  position: fixed;
+  top: 0;
+  left: var(--sidebar-w);
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--red), var(--red-light));
+  transform-origin: left;
+  transform: scaleX(0);
+  z-index: 30;
+  transition: transform 0.1s;
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE: MOBILE
+══════════════════════════════════════ */
+@media (max-width: 768px) {
+  :root { --sidebar-w: 280px; }
+
+  .sidebar {
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    transform: translateX(-100%);
+    z-index: 50;
+  }
+
+  .sidebar.open { transform: translateX(0); }
+
+  .sidebar-overlay { display: block; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+  .sidebar-overlay.open { opacity: 1; pointer-events: all; }
+
+  .hamburger { display: flex; }
+
+  .reading-progress-line { left: 0; }
+
+  .main { width: 100%; }
+
+  .topbar { padding: 0.9rem 1.25rem; }
+
+  .resources-btn span { display: none; }
+
+  .reading-area { padding: 3rem 1.5rem 6rem; }
+
+  .chapter-nav-footer { flex-direction: column; }
+  .chapter-nav-btn { max-width: 100%; }
+  .chapter-nav-btn.right { text-align: left; }
+
+  .resources-dropdown { right: 0; min-width: 200px; }
+}
+
+/* ══════════════════════════════════════
+   FIRE / ICE ACCENTS (from brand)
+══════════════════════════════════════ */
+.fire { color: var(--red-light); }
+.ice  { color: var(--ice); }
+
+/* FADE IN ANIMATION */
+.chapter-content { animation: fadeIn 0.4s ease; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- READING PROGRESS LINE -->
+<div class="reading-progress-line" id="readingLine"></div>
+
+<!-- SIDEBAR OVERLAY (mobile) -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- APP SHELL -->
+<div class="app">
+
+  <!-- ═══ SIDEBAR ═══ -->
+  <aside class="sidebar" id="sidebar" role="complementary" aria-label="Navegación del libro">
+
+    <div class="sidebar__head">
+      <div style="display:flex; gap:1rem; align-items:flex-start;">
+        <div class="sidebar__cover" aria-hidden="true">
+
+          <img
+src="portada-libro.jpg"
+alt="Ni Frío Ni Fuego"
+class="sidebar__cover-image"
+/>
+
+        </div>
+        <div>
+          <div class="sidebar__book-title">Ni Frío<br/>Ni Fuego</div>
+          <div class="sidebar__author">Alexis Jaramillo</div>
+        </div>
+      </div>
+
+      <div class="sidebar__progress-wrap">
+        <div class="sidebar__progress-label">
+          Progreso <span id="progressPct">0%</span>
+        </div>
+        <div class="sidebar__progress-bar">
+          <div class="sidebar__progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="sidebar__nav" id="sidebarNav" aria-label="Índice de capítulos">
+      <!-- CONTINUE READING -->
+      <button class="sidebar__continue" id="continueBtn" aria-label="Continuar leyendo donde lo dejaste">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Continuar leyendo
+      </button>
+
+      <!-- NAV will be injected by JS -->
+    </nav>
+
+  </aside>
+
+  <!-- ═══ MAIN ═══ -->
+  <main class="main" id="mainArea" role="main">
+
+    <!-- TOP BAR -->
+    <header class="topbar" role="banner">
+      <div class="topbar__left">
+        <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="sidebar">
+          <svg width="18" height="14" viewBox="0 0 18 14" fill="none">
+            <line x1="0" y1="1" x2="18" y2="1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="0" y1="7" x2="18" y2="7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="0" y1="13" x2="18" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <span class="topbar__chapter" id="topbarChapter">Biblioteca · Ni Frío Ni Fuego</span>
+      </div>
+
+      <div class="topbar__right">
+        <!-- Prev -->
+        <button class="nav-arrow" id="prevBtn" aria-label="Capítulo anterior" title="Anterior">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <!-- Next -->
+        <button class="nav-arrow" id="nextBtn" aria-label="Capítulo siguiente" title="Siguiente">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        
+        <button id="themeToggle" class="theme-toggle">🌙 Oscuro</button>
+
+        <!-- Resources -->
+        <div style="position:relative;">
+          <button class="resources-btn" id="resourcesBtn" aria-haspopup="true" aria-expanded="false">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 2h10v10H2z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M5 6h4M5 8.5h2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            <span>Recursos</span>
+          </button>
+          <div class="resources-dropdown" id="resourcesDropdown" role="menu">
+            <a class="resources-item" href="ni_frio_ni_fuego.pdf" download role="menuitem">
+              <span class="resources-item__icon">📄</span>
+              <div class="resources-item__text">
+                <div class="resources-item__label">Descargar PDF</div>
+                <div class="resources-item__sub">Versión imprimible</div>
+              </div>
+            </a>
+            <a class="resources-item" href="Ni_Frío_Ni_Fuego_-_Alexis_Jaramillo.epub" download role="menuitem">
+              <span class="resources-item__icon">📚</span>
+              <div class="resources-item__text">
+                <div class="resources-item__label">Descargar EPUB</div>
+                <div class="resources-item__sub">Para lectores digitales</div>
+              </div>
+            </a>
+            <button class="resources-item disabled" id="audioBtn" role="menuitem" aria-disabled="true">
+              <span class="resources-item__icon">🎧</span>
+              <div class="resources-item__text">
+                <div class="resources-item__label">Audiolibro MP3</div>
+                <div class="resources-item__sub">Próximamente</div>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- READING CONTENT -->
+    <div class="reading-area" id="readingArea" role="article" aria-live="polite">
+      <!-- Injected by JS -->
+    </div>
+
+  </main>
+</div>
+
+<!-- MODAL: Audiolibro -->
+<div class="modal-overlay" id="audioModal" role="dialog" aria-modal="true" aria-labelledby="audioModalTitle">
+  <div class="modal">
+    <div class="modal__icon">🎧</div>
+    <div class="modal__title" id="audioModalTitle">Audiolibro próximamente</div>
+    <div class="modal__body">
+      Estamos produciendo una versión narrada profesional de <em>Ni Frío Ni Fuego</em>.<br/><br/>
+      Cuando esté disponible aparecerá automáticamente en tu biblioteca.
+    </div>
+    <button class="modal__close" id="audioModalClose">Entendido</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+   JAVASCRIPT — BOOK ENGINE
+══════════════════════════════════════════════════════════════ -->
+<script>
+/* ═══════════════════════════════════════
+   BOOK DATA
+═══════════════════════════════════════ */
+const CHAPTERS = [
+  {
+    id: 'portada',
+    navLabel: 'Portada',
+    section: null,
+    render: () => `
+      <div class="chapter-header" style="border:none; padding-bottom:0; margin-bottom:0; text-align:center; padding-top:3rem;">
+        <span class="chapter-label">Biblioteca Privada</span>
+        <h1 class="chapter-title" style="font-size:clamp(2rem,5vw,3.5rem); margin-bottom:1.5rem;">
+          <span class="ice">Ni Frío</span><br/>
+          <span class="fire">Ni Fuego</span>
+        </h1>
+        <p style="font-family:var(--font-head); font-weight:300; font-size:0.9rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--grey-light); margin-bottom:3rem;">Alexis Jaramillo</p>
+
+        <div style="width:120px;height:2px;background:linear-gradient(90deg,transparent,var(--red),transparent);margin:0 auto 3rem;"></div>
+
+        <p style="font-family:var(--font-body); font-size:1.1rem; font-style:italic; color:var(--white-muted); max-width:500px; margin:0 auto 3rem; line-height:1.9;">
+          La plenitud vive donde la razón y la emoción dejan de ser enemigas.
+        </p>
+
+        <div style="background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:4px; padding:2rem; max-width:480px; margin:0 auto 3rem; text-align:left;">
+          <p style="font-family:var(--font-head); font-size:0.65rem; font-weight:700; letter-spacing:0.3em; text-transform:uppercase; color:var(--grey); margin-bottom:1rem;">Dedicatoria</p>
+          <p style="font-family:var(--font-body); font-style:italic; color:var(--white-muted); font-size:0.95rem; line-height:1.9; margin:0;">
+            A mis amigos y a mi familia, que han estado presentes en los momentos de frío y en los de fuego.<br/><br/>
+            A mí, por atreverme a escribir lo que sentía y a pensar lo que sentí.<br/><br/>
+            Y a ti, lector, que tomaste este libro en tus manos.
+          </p>
+        </div>
+
+        <p style="font-family:var(--font-head); font-size:0.72rem; color:var(--grey-light); letter-spacing:0.12em;">
+          Primera Edición Revisada y Ampliada · Junio 2026
+        </p>
+      </div>
+    `
+  },
+  {
+    id: 'antes',
+    navLabel: 'Antes de empezar',
+    section: null,
+    render: () => `
+      <div class="chapter-header">
+        <span class="chapter-label">Introducción</span>
+        <h1 class="chapter-title">Antes de empezar</h1>
+      </div>
+      <div class="chapter-content">
+        <p>Este no es un libro de autoayuda. No encontrarás aquí frases motivacionales vacías ni listas de hábitos para cambiar tu vida en siete días. Lo que encontrarás es un análisis sin filtros del conflicto más viejo y más íntimo que existe dentro de cada ser humano: el conflicto entre lo que piensas y lo que sientes.</p>
+        <p>Este libro te va a incomodar en varios momentos. Eso es intencional. Porque la incomodidad es la señal de que algo verdadero está tocando una parte de ti que normalmente mantienes oculta. No tienes que estar de acuerdo con todo. Pero sí te pido una cosa: que leas cada página con honestidad. No la honestidad que muestras al mundo. La otra. La que solo tú conoces.</p>
+        <p>La plenitud no se encuentra. Se construye. Y la construcción comienza con entender cómo funciona tu propia mente.</p>
+      </div>
+    `
+  },
+  {
+    id: 'prologo',
+    navLabel: 'Prólogo',
+    section: null,
+    render: () => `
+      <div class="chapter-header">
+        <span class="chapter-label">Prólogo</span>
+        <h1 class="chapter-title">Por qué este libro existe</h1>
+      </div>
+      <div class="chapter-content">
+        <p>Hubo un momento en la historia del pensamiento humano en que alguien decidió que la razón era superior a la emoción. Ese momento fue un error monumental. Y llevamos siglos pagando el precio.</p>
+        <p>Desde Platón, que veía las emociones como bestias que el alma racional debía domesticar, hasta el modelo corporativo del siglo XX que premiaba al ejecutivo frío y castigaba al sensible, hemos construido una civilización que desconfía profundamente de lo que siente. Al mismo tiempo, como reacción, nació otra trampa: el romanticismo emocional que glorifica el sentimiento puro, que desconfía de la razón como si fuera un enemigo del alma, que ve el análisis como frialdad y la lógica como una forma de traición a uno mismo.</p>
+        <p>Dos extremos. Dos errores. Un mismo resultado: personas incompletas.</p>
+        <p>Este libro nació de una pregunta que no me daba paz: ¿Por qué la mayoría de las personas que conozco son brillantes o sensibles, pero rara vez plenas? Y la respuesta que encontré, después de años de exploración en la neurociencia, en la filosofía, en la psicología y en la vida cotidiana fue siempre la misma: porque viven en un extremo. Porque eligieron un lado. Porque alguien, en algún momento, les enseñó que tenían que elegir.</p>
+        <p>Este libro existe para decirte que no tienes que elegir. Y para enseñarte exactamente cómo se ve vivir sin elegir.</p>
+        <blockquote><p>«La plenitud no es el premio de quien tiene más razón ni de quien siente más profundo. Es el fruto de quien aprendió a hacer las dos cosas al mismo tiempo.»</p></blockquote>
+      </div>
+    `
+  },
+  {
+    id: 'cap1',
+    navLabel: 'Capítulo 1 · El Gran Malentendido',
+    section: 'PARTE I — El conflicto',
+    render: () => `
+      <div class="chapter-header">
+        <span class="chapter-label">Capítulo 1</span>
+        <h1 class="chapter-title">El Gran Malentendido</h1>
+        <p class="chapter-subtitle">Por qué creemos que razón y emoción son opuestos</p>
+      </div>
+      <div class="chapter-content">
+        <p>Comencemos con algo que nadie te ha dicho con suficiente claridad: la razón y la emoción no son opuestos. Nunca lo fueron. Son dos mentes interdependientes del mismo cerebro, diseñadas evolutivamente para trabajar en una simbiosis perfecta. La ilusión de que son enemigos irreconciliables es precisamente eso: una mitología cultural que hemos repetido durante generaciones hasta convertirla en una verdad psicológica incuestionable.</p>
+
+        <h2>La herencia griega: cuando la razón se coronó reina</h2>
+        <p>Para desmantelar este mito, debemos comprender su origen. Platón dividió el alma humana en tres partes: la razón (el auriga), el espíritu (el caballo noble) y el apetito o pasiones (el caballo indómito). Estableció una jerarquía donde la razón debía gobernar tiránicamente a las otras dos partes. Las emociones —el miedo, el deseo, la ira— eran vistas como fuerzas caóticas e inferiores que debían ser controladas, domesticadas o, idealmente, silenciadas.</p>
+        <p>Esta idea penetró de tal forma en el pensamiento occidental que define nuestro lenguaje contemporáneo. Lo escuchas cuando alguien te aconseja «no te dejes llevar por las emociones», como si el acto de sentir fuera intrínsecamente un sinónimo de equivocarse. Lo ves cuando se elogia a un líder por ser «frío y calculador», transformando la anestesia emocional en una virtud intelectual.</p>
+        <p>Pero Platón cometió un error estructural: confundió el mal uso o desborde de las emociones con la naturaleza de las emociones mismas. Es el equivalente a confundir el fuego doméstico con un incendio forestal. El fuego cocina, calienta y alumbra; el incendio descontrolado destruye. El problema no es el fuego; es la ausencia de un contenedor adecuado.</p>
+
+        <h2>La herencia moderna y la reacción pendular</h2>
+        <p>Siglos más tarde, la Revolución Industrial remató la herida. Al transformar el mundo en una fábrica gigante donde la eficiencia era el valor supremo, el ser humano ideal pasó a ser redefinido a imagen de la máquina: predecible, lógico, desprovisto de interferencias sentimentales. El éxito se convirtió en el triunfo absoluto de la métrica sobre la vivencia interna, produciendo sociedades técnicamente perfectas pero existencialmente vacías.</p>
+        <p>Como respuesta inevitable a esta deshumanización, el péndulo osciló hacia el extremo opuesto con el Romanticismo y, en las últimas décadas, con el culto a la espiritualidad superficial de la nueva era. Bajo consignas como «sigue a tu corazón» o «confía ciegamente en tu vibración», se canonizó el sentimiento puro y se satanizó la lógica como una fuerza fría y destructora del alma. Sin embargo, un corazón sin la brújula de la razón es un órgano ciego.</p>
+
+        <h2>Lo que la neurociencia vino a confirmar</h2>
+        <p>En 1994, el neurocientífico Antonio Damasio publicó una investigación que transformó este debate en su obra <em>El error de Descartes</em>. Damasio estudió minuciosamente a pacientes con lesiones específicas en la corteza prefrontal ventromedial, la zona del cerebro encargada de interconectar los procesos cognitivos lógicos con las señales emocionales del sistema límbico.</p>
+        <p>Los resultados fueron revolucionarios: estos pacientes conservaban intactas todas sus capacidades intelectuales. Su memoria, su lógica y su capacidad para resolver test de coeficiente intelectual no habían disminuido un solo punto. Conocían perfectamente las consecuencias teóricas de sus actos. Y sin embargo, sus vidas personales y profesionales se desmoronaban por una razón insólita: eran incapaces de tomar decisiones eficaces en el mundo real.</p>
+        <p>Al carecer de lo que Damasio denominó «marcadores somáticos» —la sutil señal corporal o emocional que nos dice si algo se siente bien o mal—, estos individuos quedaban atrapados en un bucle infinito de análisis lógico sin poder elegir jamás. <strong>Sin emoción, la razón se paraliza en un laberinto de opciones infinitas de igual valor aparente. La emoción no es la enemiga de la decisión; es su catalizador biológico.</strong></p>
+
+        <div class="reflexion">
+          <span class="reflexion__label">✦ Reflexión 1 · El malentendido en tu propia historia</span>
+          <p>Piensa en cómo fuiste educado respecto a tus afectos. ¿Te enseñaron que llorar era un signo de debilidad o que expresar entusiasmo era ridículo? Escribe tres mandatos inconscientes sobre las emociones que heredaste en tu infancia y cuestiónate si hoy en día siguen distorsionando tu vida o si es momento de archivarlos.</p>
+        </div>
+      </div>
+    `
+  },
+  {
+    id: 'cap2',
+    navLabel: 'Capítulo 2 · Anatomía del Conflicto',
+    section: 'PARTE I — El conflicto',
+    render: () => `
+      <div class="chapter-header">
+        <span class="chapter-label">Capítulo 2</span>
+        <h1 class="chapter-title">Anatomía del Conflicto Interior</h1>
+        <p class="chapter-subtitle">Cómo tu cerebro crea la guerra que vives por dentro</p>
+      </div>
+      <div class="chapter-content">
+        <p>No tienes una mente única y uniforme; albergas dos sistemas de procesamiento cognitivo radicalmente diferentes que conviven bajo el mismo cráneo. El psicólogo Daniel Kahneman codificó de manera magistral estas dos vías de pensamiento llamándolas Sistema 1 y Sistema 2. Para comprender la crudeza de tu conflicto cotidiano, es fundamental llamarlas por su nombre operativo y vivencial: la <strong>Mente Instintiva</strong> y la <strong>Mente Reflexiva</strong>.</p>
+
+        <h2>La Mente Instintiva y la Mente Reflexiva</h2>
+        <p>La <strong>Mente Instintiva</strong> es veloz, asociativa, emocional, automática e inconsciente. Funciona en una escala de milisegundos sin requerir tu permiso. Es el software evolutivo que te obliga a retirar la mano de una superficie hirviendo antes de que computes el concepto de dolor, el que detecta una mirada hostil en una fracción de segundo y el que genera esa oleada instantánea de simpatía, miedo o atracción. Su consumo energético es bajísimo, por lo que el cerebro la prefiere para casi todo.</p>
+        <p>Por otro lado, la <strong>Mente Reflexiva</strong> es lenta, analítica, deliberada y profundamente lógica. Requiere un esfuerzo consciente y consume una cantidad ingente de glucosa y energía. Es el sistema que utilizas para balancear tu presupuesto mensual, planificar una estrategia corporativa a cinco años o aprender una estructura sintáctica compleja. Debido a su alto costo energético, el cerebro la mantiene en un estado de hibernación relativa, activándola únicamente cuando el entorno presenta un problema que la Mente Instintiva no puede resolver mediante atajos.</p>
+        <p><strong>La Mente Instintiva ejecuta el 95% de tus conductas diarias.</strong> La Mente Reflexiva suele despertarse tarde, no para decidir, sino para redactar un informe racional que justifique la decisión que el instinto ya tomó.</p>
+
+        <h2>Sesgos y trampas de ambos sistemas</h2>
+        <p>Este diseño es una genialidad evolutiva para sobrevivir en la sabana de hace doscientos mil años, donde dudar ante un ruido entre la maleza significaba la muerte. Sin embargo, el mundo moderno no es la sabana. Cuando la Mente Instintiva se enfrenta a mercados financieros, contratos laborales o crisis matrimoniales, sus atajos se transforman en sesgos cognitivos autodestructivos:</p>
+        <ul>
+          <li><strong>El sesgo de confirmación:</strong> Tu mente límbica adopta una postura emocional inmediata y ordena a la razón buscar exclusivamente los datos que validen esa postura, ignorando cualquier evidencia en contrario.</li>
+          <li><strong>La aversión a la pérdida:</strong> El dolor neurológico de perder cien dólares es el doble de intenso que el placer de ganarlos, atrapándote en empleos grises o relaciones marchitas por el puro terror evolutivo a perder tu precaria seguridad.</li>
+        </ul>
+        <p>Pero la solución no consiste en hipertrofiar la Mente Reflexiva. Cuando esta se desconecta del sentir, engendra patologías cognitivas igual de paralizantes. La más célebre es la <em>parálisis por análisis</em>: un estado agónico donde el individuo evalúa tantas variables y escenarios posibles que es incapaz de dar un paso, ignorando que no decidir es, en sí mismo, una decisión con consecuencias.</p>
+
+        <div class="reflexion">
+          <span class="reflexion__label">✦ Reflexión 2 · Cartografía de tu fricción mental</span>
+          <p>Cada vez que te descubras pronunciando la clásica frase: «Sé perfectamente lo que tengo que hacer, pero no me sale», estás presenciando un cisma entre tus dos mentes. La Reflexiva ha trazado la ruta correcta, pero la Instintiva se niega a encender el motor porque percibe un peligro invisible para el intelecto.</p>
+        </div>
+      </div>
+    `
+  },
+  {
+    id: 'cap3',
+    navLabel: 'Capítulo 3 · Lo que las emociones son',
+    section: 'PARTE I — El conflicto',
+    render: () => `
+      <div class="chapter-header">
+        <span class="chapter-label">Capítulo 3</span>
+        <h1 class="chapter-title">Lo Que las Emociones Realmente Son</h1>
+        <p class="chapter-subtitle">La información que tu cuerpo lleva décadas intentando comunicarte</p>
+      </div>
+      <div class="chapter-content">
+        <p>Hemos vaciado de significado la palabra «emoción». En la cultura popular, se asocia exclusivamente con arrebatos teatrales, histeria o sentimentalismo blando. Sin embargo, desde una perspectiva estrictamente científica y fenomenológica, las emociones no son interrupciones de tu estabilidad; son el sistema de navegación biológica más sofisticado de tu organismo. Son paquetes de información de alta velocidad que te revelan el estado real de tu relación con el entorno.</p>
+
+        <h2>Emociones primarias y el impacto de la supresión</h2>
+        <p>El trabajo transcultural de Paul Ekman demostró que existen respuestas neurofisiológicas universales que no dependen de la geografía ni de la educación: el miedo nos prepara para la supervivencia ante la amenaza; la ira moviliza recursos psicofísicos para defender un límite violado; la tristeza ralentiza el metabolismo para facilitar la digestión psíquica de una pérdida. Estas respuestas son el resultado de millones de años de depuración evolutiva.</p>
+        <p>El sufrimiento no nace del hecho de experimentar estas fuerzas, sino del analfabetismo emocional con el que las gestionamos. Cuando un niño crece en un ecosistema familiar donde el llanto se castiga con el desprecio, aprende a sepultar su tristeza. Cuando a una mujer se le enseña que la rabia la vuelve menos atractiva o peligrosa, transmuta su ira legítima en una complacencia pasivo-agresiva.</p>
+        <p>Pero la energía termodinámica de una emoción no se desvanece por decreto intelectual. Como bien señala el psiquiatra Bessel van der Kolk en su célebre axioma, <em>el cuerpo lleva la cuenta</em>. La ira amordazada se convierte en contracturas cervicales crónicas, colon irritable o insomnio pertinaz. <strong>El cuerpo es el escenario físico donde tus emociones gritan lo que tu timidez o tu orgullo intentan callar.</strong></p>
+
+        <h2>Granularidad emocional</h2>
+        <p>La clave científica para disolver este nudo es lo que la neurocientífica Lisa Feldman Barrett denomina <em>granularidad emocional</em>: la sofisticación cognitiva para discernir con precisión milimétrica qué estás sintiendo exactamente.</p>
+        <p>Una persona con baja granularidad solo alcanza a decir que se siente «mal» o «estresada». Una mente con alta granularidad desglosa ese malestar difuso y descubre que lo que experimenta es, en realidad, una mezcla precisa de humillación, nostalgia y vulnerabilidad desprotegida.</p>
+        <p>La neurociencia demuestra que el simple acto de etiquetar una emoción con la palabra exacta reduce de inmediato la hiperactividad de la amígdala cerebral y activa la corteza prefrontal izquierda. <strong>Nombrar tu dolor con precisión no es un ejercicio poético; es un proceso biológico que seda tu sistema nervioso de forma instantánea.</strong></p>
+      </div>
+    `
+  },
+  {
+    id: 'cap4',
+    navLabel: 'Capítulo 4 · Lo que la razón realmente es',
+    section: 'PARTE II — El diagnóstico',
+    render: () => `
+      <div class="chapter-header">
+        <span class="chapter-label">Capítulo 4</span>
+        <h1 class="chapter-title">Lo Que la Razón Realmente Es</h1>
+        <p class="chapter-subtitle">Más allá del pensamiento frío</p>
+      </div>
+      <div class="chapter-content">
+        <p>Así como la emoción ha sido calumniada, la razón ha sido trágicamente desnaturalizada. La hemos degradado a un mero algoritmo de cálculo de utilidad, una calculadora fría destinada a acumular estatus, optimizar procesos o levantar murallas defensivas. Pero la razón en su acepción clásica —el <em>logos</em>— no es distancia ni falta de empatía; es la facultad arquitectónica del espíritu humano.</p>
+
+        <h2>La razón al servicio del sentir</h2>
+        <p>La verdadera racionalidad no tiene como meta extinguir la pasión, sino dotarla de un cauce seguro. La emoción es el combustible inflamable; la razón es el motor de combustión interna. Sin combustible, el coche se congela; sin motor, el combustible estalla destruyendo todo a su alrededor.</p>
+        <p>Cuando la razón actúa en perfecta comunión con el sentir, ejerce funciones insustituibles: es capaz de contextualizar un impulso defensivo, simular las consecuencias a largo plazo de una respuesta visceral y construir la infraestructura de hábitos y disciplina necesaria para cuando la motivación emocional natural decaiga por completo.</p>
+
+        <h2>La patología de la intelectualización</h2>
+        <p>El abuso de la razón se manifiesta con nitidez en el mecanismo de defensa conocido como <em>intelectualización</em>. Aquellas personas que sufrieron traumas relacionales tempranos suelen refugiarse en el ático de su mente racional. Analizan sus tragedias como si le hubieran ocurrido a un tercero, teorizan sobre sus divorcios con un distanciamiento clínico admirable y explican conceptualmente sus vacíos existenciales.</p>
+        <p>Se convencen de que son seres profundamente objetivos, cuando la realidad es que están usando la erudición y la semántica como un chaleco antibalas para evitar experimentar el dolor en su propia carne. Es una estrategia de supervivencia eficaz a corto plazo, pero condena al individuo a una existencia incorpórea y de plástico, donde la intimidad real se vuelve imposible porque <strong>la intimidad exige, de forma irrenunciable, la vulnerabilidad de sentir.</strong></p>
+      </div>
+    `
+  },
+  {
+    id: 'cap5',
+    navLabel: 'Capítulo 5 · La Plenitud',
+    section: 'PARTE II — El diagnóstico',
+    render: () => `
+      <div class="chapter-header">
+        <span class="chapter-label">Capítulo 5</span>
+        <h1 class="chapter-title">La Plenitud</h1>
+        <p class="chapter-subtitle">Qué es y dónde vive</p>
+      </div>
+      <div class="chapter-content">
+        <p>Vivimos bajo el bombardeo incesante de una industria del bienestar que vende la plenitud como si fuera un sinónimo de felicidad perpetua o de euforia dopaminérgica ininterrumpida. Esta confusión semántica es la fuente principal de nuestra frustración existencial contemporánea. Para edificar una vida con sentido, resulta imperativo trazar una línea divisoria inequívoca entre cuatro conceptos que la modernidad tiende a amalgamar de forma errónea:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Concepto</th>
+              <th>Naturaleza</th>
+              <th>Duración</th>
+              <th>Origen</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Placer</strong></td>
+              <td>Dopaminérgica</td>
+              <td>Efímera</td>
+              <td>Consumo externo</td>
+            </tr>
+            <tr>
+              <td><strong>Felicidad</strong></td>
+              <td>Endorfínica</td>
+              <td>Variable</td>
+              <td>Sucesos favorables</td>
+            </tr>
+            <tr>
+              <td><strong>Satisfacción</strong></td>
+              <td>Cognitiva</td>
+              <td>Prolongada</td>
+              <td>Logros alcanzados</td>
+            </tr>
+            <tr>
+              <td><strong class="fire">Plenitud</strong></td>
+              <td>Integradora</td>
+              <td>Estable y permanente</td>
+              <td>Integración interior</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>El <strong>Placer</strong> es un mecanismo neuroquímico de recompensa a corto plazo. Es intrínsecamente voraz: debido al proceso de adaptación hedónica, el cerebro requiere dosis cada vez mayores del mismo estímulo para recrear idéntica intensidad física. Confundir la plenitud con el placer es la autopista directa hacia la adicción y el hastío existencial.</p>
+        <p>La <strong>Plenitud</strong>, en cambio, opera en una dimensión ajena a la tiranía de las circunstancias. No es la ausencia de dolor, ni la erradicación del conflicto; es la capacidad de integrar de manera consciente la totalidad de la experiencia humana —lo luminoso y lo trágico, lo lógico y lo visceral—. La plenitud no se asemeja a una superficie marina en calma absoluta; <strong>es la hondura del océano, inalterable aun en medio de la peor de las tormentas superficiales.</strong></p>
+
+        <h2>Casos ilustrativos de la división existencial</h2>
+        <p>Para aterrizar este concepto en el tejido de la vida cotidiana, analicemos dos arquetipos humanos comunes que encarnan el fracaso de la desintegración:</p>
+
+        <h3>Bernardo · La forma sin textura</h3>
+        <p>Bernardo es un cirujano de enorme prestigio internacional. Su vida es una obra maestra de la Mente Reflexiva y la planificación racional. Su agenda está calculada al milímetro, sus finanzas son impecables y jamás toma una decisión sin realizar previamente un exhaustivo balance de riesgos. Ha alcanzado una satisfacción analítica perfecta. Sin embargo, Bernardo arrastra una alarmante anhedonia crónica. Cuando abraza a sus hijos, su mente calcula los minutos que restan para la siguiente lectura médica. <em>Bernardo habita una jaula geométrica impecable construida por su propio intelecto.</em></p>
+
+        <h3>Elena · La textura sin forma</h3>
+        <p>En el polo opuesto se encuentra Elena, una talentosa pintora que ha erigido su identidad sobre el dogma de la autenticidad emocional absoluta. Elena no planea; ella «fluye». Si se despierta con angustia, cancela de inmediato sus compromisos comerciales porque debe «honrar su sentir». Inicia proyectos artísticos con una pasión incendiaria que se extingue a las pocas semanas cuando el entusiasmo inicial decae y el trabajo exige la aburrida disciplina de la estructura racional. <em>Elena vive atrapada en un río desbordado que erosiona de manera constante sus propios cimientos.</em></p>
+
+        <blockquote><p>La plenitud es el territorio sagrado donde la estructura racional de Bernardo abraza la vitalidad emocional de Elena.</p></blockquote>
+      </div>
+    `
+  },
+  {
+    id: 'cap6',
+    navLabel: 'Capítulo 6 · El Precio de la División',
+    section: 'PARTE II — El diagnóstico',
+    render: () => `
+      <div class="chapter-header">
+        <span class="chapter-label">Capítulo 6</span>
+        <h1 class="chapter-title">El Precio de la División</h1>
+        <p class="chapter-subtitle">Qué le cuesta a tu vida vivir en un solo extremo</p>
+      </div>
+      <div class="chapter-content">
+        <p>Habitar de manera permanente en uno de los dos extremos de la mente no es un rasgo de personalidad inofensivo; es una mutilación psíquica que cobra una factura económica, biológica y relacional de proporciones catastróficas. Vivir dividido fragmenta el carácter y erosiona la existencia a través de un goteo constante de costos visibles e invisibles.</p>
+
+        <h2>La factura existencial: costos visibles e invisibles</h2>
+        <p>Los <strong>costos visibles</strong> de la desintegración son aquellos que terminan por irrumpir en la realidad exterior de forma estrepitosa. En el extremo hiper-racional, el costo visible se traduce en colapsos de salud por estrés crónico, divorcios fulminantes provocados por una pareja extenuada de convivir con un témpano de hielo lógico, o la pérdida de liderazgos empresariales por incapacidad absoluta de conectar con el factor humano de los equipos.</p>
+        <p>No obstante, los <strong>costos invisibles</strong> son sustancialmente más perversos, pues operan en el subsuelo de la conciencia de manera silenciosa. El principal de ellos es la <em>apatía existencial</em>: esa niebla gris que se instala en el individuo hiper-racional que, habiendo silenciado sus emociones para no sufrir, descubre que también ha anestesiado su capacidad para experimentar asombro, alegría o entusiasmo.</p>
+
+        <h2>Sintomatología del desequilibrio</h2>
+        <h3>Señales tempranas</h3>
+        <ul>
+          <li><strong>Polo racional:</strong> Irritabilidad sorda ante imprevistos; rumiación intelectual nocturna; cinismo sutil hacia las demostraciones de afecto; desconexión corporal leve.</li>
+          <li><strong>Polo emocional:</strong> Cambios anímicos bruscos; fatiga decisional extrema; necesidad constante de validación externa; interpretación de discrepancias como ataques personales.</li>
+        </ul>
+        <h3>Señales avanzadas</h3>
+        <ul>
+          <li><strong>Polo racional:</strong> Anhedonia severa; crisis de identidad profundas; somatizaciones crónicas; aislamiento relacional disfrazado de autosuficiencia aristocrática.</li>
+          <li><strong>Polo emocional:</strong> Ansiedad generalizada; dinámicas de codependencia destructiva; parálisis laboral; la dolorosa sensación de ser una hoja seca arrastrada caóticamente por el viento de los acontecimientos externos.</li>
+        </ul>
+      </div>
+    `
+  },
+  {
+    id: 'cap7',
+    navLabel: 'Capítulo 7 · La Inteligencia Integradora',
+    section: 'PARTE III — La integración',
+    render: () => `
+      <div class="chapter-header">
+        <span class="chapter-label">Capítulo 7</span>
+        <h1 class="chapter-title">La Inteligencia Integradora</h1>
+        <p class="chapter-subtitle">El tipo de inteligencia que nadie te enseñó</p>
+      </div>
+      <div class="chapter-content">
+        <p>La inteligencia emocional supuso un avance cardinal al desplazar la hegemonía del coeficiente intelectual tradicional, pero resulta insuficiente para alcanzar el florecimiento humano. Manejar o modular las emociones sigue partiendo de una premisa sutil de control. Lo que el ser humano del siglo XXI requiere con urgencia es la <strong>Inteligencia Integradora</strong>: la capacidad meta-cognitiva de sostener encendidos ambos sistemas de procesamiento de manera simultánea, permitiendo que dialoguen en igualdad de condiciones jerárquicas.</p>
+        <p>Esta inteligencia no es un don innato; es una musculatura psíquica compuesta por cinco capacidades nucleares que se pueden entrenar de forma deliberada:</p>
+
+        <h2>1. Consciencia Dual</h2>
+        <p>La capacidad de desdoblar la atención en tiempo real durante una situación crítica para observar simultáneamente qué está procesando la Mente Reflexiva y qué está experimentando fisiológicamente la Mente Instintiva, sin identificarse con ninguna de las dos.</p>
+        <p><strong>Ejemplo práctico:</strong> Estás en una junta de trabajo y un colega critica agriamente la propuesta en la que trabajaste tres meses. La Consciencia Dual te permite registrar que tu pulso se acelera y tu estómago se aprieta mientras tu intelecto redacta una respuesta sarcástica para humillarlo. Al volverte consciente de ambos vectores, dejas de ser el títere de la fricción.</p>
+        <p><strong>Desarrollo:</strong> Instala alarmas silenciosas tres veces al día. Al sonar, detente quince segundos y responde mentalmente: ¿Qué palabra exacta describe mi estado emocional actual y qué pensamiento abstracto ocupa mi intelecto en este instante?</p>
+
+        <h2>2. Traducción Interna</h2>
+        <p>La habilidad de actuar como un intérprete bilingüe dentro de tu propio cráneo. Traduce el lenguaje no verbal, visceral y somático de la emoción a conceptos lógicos comprensibles para el intelecto, y traduce los marcos éticos y planes abstractos de la razón a imágenes y sensaciones que la emoción pueda abrazar.</p>
+        <p><strong>Desarrollo:</strong> Escribe en un papel una emoción incómoda que sientas con frecuencia. Redacta una carta en primera persona donde esa emoción le explique a tu intelecto exactamente qué peligro intenta advertirte y qué valor está intentando proteger.</p>
+
+        <h2>3. Tolerancia a la Tensión</h2>
+        <p>La capacidad de sostener la agónica incomodidad psicológica que se genera cuando la razón y la emoción divergen por completo ante una elección, sin capitular apresuradamente ante ninguno de los dos extremos con tal de aliviar la disonancia cognitiva.</p>
+        <p><strong>Desarrollo:</strong> Cuando experimentes un dilema interno, oblígate a no tomar ninguna acción externa durante un lapso mínimo de cuarenta y ocho horas. Siéntate veinte minutos diarios a contemplar ambas posturas en tu libreta, permitiendo que ambas voces expongan sus argumentos sin censura.</p>
+
+        <h2>4. Decisión Integrada</h2>
+        <p>El arte de forjar resoluciones vitales que no dejen heridos de gravedad en el campo de batalla interior. Es una elección que cuenta con el aval logístico de la lógica y el consentimiento visceral del corazón.</p>
+        <p><strong>Error común:</strong> Creer que una decisión integrada es un pacto tibio de mediocridad donde ambos sistemas pierden un cincuenta por ciento. No es un compromiso resignado; es una síntesis superior donde ambos sistemas encuentran un nuevo nivel de coherencia.</p>
+        <p><strong>Desarrollo:</strong> Antes de ejecutar cualquier decisión de gran calado, sométela al test del espejo: ¿Puedo defender los argumentos matemáticos de esta elección ante un auditorio frío y, al mismo tiempo, puedo respirar profundamente con el pecho expandido al visualizarme viviendo las consecuencias de este acto?</p>
+
+        <h2>5. Presencia Completa</h2>
+        <p>La cumbre operativa de la Inteligencia Integradora. Es la habilidad de volcarse sobre la experiencia presente manteniendo plenamente activos los sensores somáticos del corazón y las facultades críticas del intelecto.</p>
+        <p><strong>Desarrollo:</strong> Elige una actividad cotidiana monótona. Durante diez minutos, ejecútala activando la consciencia sensorial absoluta de cada detalle físico al tiempo que mantienes una vigilancia racional implacable para devolver tu atención al presente cada vez que intente fugarse hacia proyecciones del futuro.</p>
+      </div>
+    `
+  },
+  {
+    id: 'cap8',
+    navLabel: 'Capítulo 8 · El Arte de Decidir',
+    section: 'PARTE III — La integración',
+    render: () => `
+      <div class="chapter-header">
+        <span class="chapter-label">Capítulo 8</span>
+        <h1 class="chapter-title">El Arte de Decidir Desde el Centro</h1>
+        <p class="chapter-subtitle">Un método para las decisiones que realmente importan</p>
+      </div>
+      <div class="chapter-content">
+        <p>Las elecciones menores de la cotidianidad deben delegarse por completo a los automatismos de la Mente Instintiva. Pretender racionalizar cada micro-decisión diaria induce un severo cuadro de agotamiento del lóbulo prefrontal. Sin embargo, cuando nos topamos con los grandes encrucijadas de la existencia, aquellas cuyas ondas expansivas moldearán nuestros próximos diez años, el uso exclusivo del impulso o del análisis nos conduce inexorablemente al autoengaño.</p>
+        <p>Para estas encrucijadas críticas, se requiere la aplicación estricta del <strong>Método de los Tres Tiempos:</strong></p>
+
+        <h2>Caso 1 · El dilema laboral de Mateo</h2>
+        <p><em>Carrera vs. Propósito</em></p>
+        <p>Mateo, de cuarenta y dos años, se desempeña como vicepresidente de riesgos en una entidad bancaria multinacional. Goza de estabilidad económica envidiable, pero padece un vacío existencial crónico que roza la depresión. Ha recibido la propuesta de incorporarse como cofundador a una startup tecnológica enfocada en energías renovables.</p>
+        <ul>
+          <li><strong>Tiempo de la Emoción:</strong> Mateo se abstiene de abrir hojas de cálculo. Se sienta a solas y cierra los ojos imaginando ambos escenarios. Al visualizarse permaneciendo cinco años más en el banco, registra una opresión inmediata en el diafragma. Al visualizarse asumiendo el reto de la startup, experimenta una descarga eléctrica de pánico real en el estómago, seguida de una profunda oleada de ligereza corporal y entusiasmo genuino en el pecho. <em>Conclusión del instinto: El banco lo apaga físicamente; la startup lo asusta pero lo vitaliza.</em></li>
+          <li><strong>Tiempo de la Razón:</strong> Mateo activa su Mente Reflexiva. Calcula su fondo de emergencia real y descubre que, reduciendo gastos superfluos, su hogar puede sostenerse perfectamente durante veinticuatro meses sin percibir dividendos de la startup. <em>Conclusión del intelecto: El riesgo no es mortal; es financiero y completamente manejable.</em></li>
+          <li><strong>Tiempo del Diálogo:</strong> Mateo confronta ambos sistemas. La razón le dice al instinto: «Te daré el salto al vacío que imploras, pero bajo una red de seguridad financiera estricta.» Mateo firma el contrato de la startup desde una calma profunda y activa.</li>
+        </ul>
+
+        <h2>Caso 2 · El dilema vincular de Camila</h2>
+        <p><em>Compromiso a largo plazo o Ruptura</em></p>
+        <p>Camila convive desde hace cuatro años con Julián. Su relación es pacífica, predecible y carente de conflictos mayores. Julián le ha propuesto contraer matrimonio y adquirir una vivienda mediante un crédito hipotecario mancomunado. Camila experimenta una duda sorda que la corroe por dentro.</p>
+        <ul>
+          <li><strong>Tiempo de la Emoción:</strong> Al contemplar la fotografía de Julián, Camila constata que no experimenta hostilidad ni rechazo, pero sí una alarmante neutralidad afectiva, similar a la que sentiría por un entrañable compañero de habitación. La idea de atar su existencia legal a Julián durante las próximas décadas le genera una sutil sensación de claustrofobia física.</li>
+          <li><strong>Tiempo de la Razón:</strong> Su intelecto contraataca enumerando las ventajas lógicas del pacto: «Julián es un hombre noble, profesional intachable, excelente proveedor.»</li>
+          <li><strong>Tiempo del Diálogo:</strong> Su intelecto se ve forzado a admitir una verdad incómoda: está utilizando las virtudes objetivas de Julián como un escudo racional para no asumir el dolor de la separación. Camila decide rescindir la relación con una honestidad desgarradora pero compasiva.</li>
+        </ul>
+
+        <h2>Caso 3 · El dilema de propósito de Diego</h2>
+        <p><em>Redefinición tras el colapso existencial</em></p>
+        <p>Diego edificó su identidad completa sobre el pilar del éxito corporativo. Tras sufrir un episodio de burnout severo a los cincuenta años, enfrenta la encrucijada de redefinir su identidad y su uso del tiempo para el resto de su madurez.</p>
+        <ul>
+          <li><strong>Tiempo de la Emoción:</strong> Diego registra un profundo asco visceral hacia la idea de regresar a salas de juntas. Al mismo tiempo, descubre un entusiasmo infantil latente al reconectar con el trabajo manual: la carpintería artesanal y la horticultura orgánica.</li>
+          <li><strong>Tiempo de la Razón:</strong> Su intelecto evalúa su patrimonio acumulado y concluye que sus inversiones pasivas cubren con holgura sus costes de vida. Sin embargo, le advierte: «Si te retiras por completo a sembrar hortalizas, tu agudeza analítica se marchitará.»</li>
+          <li><strong>Tiempo del Diálogo:</strong> Diego diseña una estructura híbrida: tres días a la semana de mentorías estratégicas a jóvenes emprendedores, y cuatro días restantes para el trabajo manual de la tierra en su finca. <em>Su existencia recobra un centro de gravedad indestructible.</em></li>
+        </ul>
+      </div>
+    `
+  },
+  {
+    id: 'cap9',
+    navLabel: 'Capítulo 9 · Relaciones desde la Plenitud',
+    section: 'PARTE III — La integración',
+    render: () => `
+      <div class="chapter-header">
+        <span class="chapter-label">Capítulo 9</span>
+        <h1 class="chapter-title">Relaciones desde la Plenitud</h1>
+        <p class="chapter-subtitle">Por qué amamos y peleamos como lo hacemos</p>
+      </div>
+      <div class="chapter-content">
+        <p>No existe laboratorio humano más implacable para evaluar nuestro grado de integración interior que el espacio íntimo de la relación de pareja. En el noviazgo y la convivencia, las máscaras de la autosuficiencia racional y las fantasías del romanticismo puro saltan por los aires, dejando al desnudo las heridas de apego que arrastramos desde la primera infancia.</p>
+
+        <h2>La neurosis vincular: Patrones desintegrados</h2>
+        <p>El más común de ellos es el <strong>Patrón Frío-Caliente (Persigue-Distancia)</strong>. En esta dinámica, un miembro de la pareja opera desde la hiper-emocionalidad ansiosa: ante la menor señal de distanciamiento de su pareja, su amígdala cerebral interpreta un peligro inminente de abandono mortal, lo que desata conductas de persecución, reclamos exasperados, llamadas incesantes y demandas de validación. El otro miembro opera desde la hiper-racionalidad evitativa: al percibir la avalancha emocional de su pareja, su sistema defensivo activa la retirada analítica.</p>
+        <p>El <strong>Patrón de Dos Racionales</strong> engendra matrimonios corporativos perfectos: sus hogares son impecables, sus agendas logísticas están perfectamente coordinadas. Sin embargo, sus alcobas albergan una preocupante esterilidad emocional y erótica. Son socios comerciales eficientes que habitan bajo el mismo techo, vulnerables al colapso absoluto el día en que una tragedia existencial exija una musculatura emocional de la que carecen por completo.</p>
+
+        <h2>Protocolo de reparación integrada</h2>
+        <p>Apoyándonos en las investigaciones de Sue Johnson, sabemos que las peleas recurrentes de pareja casi nunca versan sobre los temas superficiales por los que se grita. El ochenta y cinco por ciento de las disputas conyugales son, en el fondo, protestas desesperadas del sistema límbico ante la percepción de una pérdida de seguridad emocional.</p>
+        <ol>
+          <li><strong>Detención Somática Obligatoria:</strong> Al registrar el inicio de la escalada, cualquiera de los miembros activa conscientemente la pausa del Sistema 2, absteniéndose de emitir la siguiente frase defensiva.</li>
+          <li><strong>Revelación de la Herida Primaria:</strong> El miembro que inició la disputa debe descender de la queja superficial a su verdad límbica profunda: «Cuando llegas una hora tarde sin avisarme, mi Mente Instintiva experimenta una profunda oleada de soledad y desamparo.»</li>
+          <li><strong>Validación Límbica Transversal:</strong> El receptor se abstiene de defenderse mediante argumentos lógicos. En su lugar, valida el sentir de su pareja: «Comprendo perfectamente que mi retraso y mi silencio te hayan hecho sentir desprotegida y sola.»</li>
+          <li><strong>Estructuración de Límites Coherentes:</strong> Una vez que la calma fisiológica ha retornado, ambos miembros utilizan la Mente Reflexiva para diseñar acuerdos logísticos específicos que prevengan la recurrencia del dolor.</li>
+        </ol>
+
+        <h2>El arte de establecer límites integrados</h2>
+        <p>Un límite erigido exclusivamente desde la razón desprovista de empatía es una muralla de piedra medieval. Un límite difuso establecido desde la emocionalidad sin anclaje racional es un límite permeable y sumiso.</p>
+        <blockquote><p>Un límite integrado es un acto de respeto bidireccional: se enuncia con la calidez y empatía del corazón, pero se sostiene con la firmeza inflexible y la claridad conceptual del intelecto.</p></blockquote>
+      </div>
+    `
+  },
+  {
+    id: 'cap10',
+    navLabel: 'Capítulo 10 · La Práctica',
+    section: 'PARTE III — La integración',
+    render: () => `
+      <div class="chapter-header">
+        <span class="chapter-label">Capítulo 10</span>
+        <h1 class="chapter-title">La Práctica de Vivir Integrado</h1>
+        <p class="chapter-subtitle">No es una meta que alcanzas. Es una forma de vivir.</p>
+      </div>
+      <div class="chapter-content">
+        <p>La lectura de este volumen perdería toda utilidad si sus tesis conceptuales permanecieran recluidas en el plano de la abstracción teórica. La Inteligencia Integradora no constituye una revelación mística que se adquiere de una vez y para siempre; es un arte performativo y una disciplina diaria que altera la neuroplasticidad cerebral a través de la repetición deliberada de rituales específicos.</p>
+
+        <h2>Fundamentos neurobiológicos de las prácticas</h2>
+        <p>Al ejecutar la <em>Pausa de los 90 Segundos</em>, estamos honrando la ventana temporal biológica descubierta por la neurocientífica Jill Bolte Taylor. Cuando un estímulo externo desata una reacción emocional de enojo o pánico, la descarga química de hormonas y neurotransmisores tarda exactamente noventa segundos en ser bombeada, inundar el torrente sanguíneo y disiparse por completo.</p>
+        <p>Si la emoción persiste más allá de ese minuto y medio, no se debe a la biología del estímulo inicial; se debe exclusivamente a que la Mente Reflexiva ha acudido al rescate de la crisis inyectándole combustible de alta potencia mediante bucles lógicos de rumiación, victimismo e historias mentales catastrofistas. <strong>Interrumpir la respuesta exterior durante noventa segundos permite que la tormenta química amaine de forma natural.</strong></p>
+
+        <h2>Obstáculos y errores comunes</h2>
+        <p><strong>La tiranía de la urgencia digital:</strong> Habitamos un ecosistema social tecnológicamente diseñado para hiperestimular la Mente Instintiva. Las notificaciones incesantes, los algoritmos de gratificación dopaminérgica instantánea y la cultura del hiperconsumo conspiran activamente para mantener tu amígdala cerebral en un estado de alerta y reactividad perpetua.</p>
+        <p><strong>La incomodidad de la resistencia identitaria:</strong> Al implementar estas prácticas, experimentarás una profunda extrañeza existencial. El individuo hiper-racional sentirá que escribir un diario sobre sus dolores corporales es una pérdida de tiempo ridícula y sensiblera; el hiper-emocional sentirá que forzarse a respetar una agenda rígida de presupuestos ahoga su sacrosanta libertad espiritual.</p>
+        <p>Es fundamental comprender que esa resistencia no es una señal de fracaso; es la agonía del viejo ego desintegrado que se resiste a perder su cómodo monopolio neurótico. <strong>El verdadero indicador de crecimiento no es la imperturbabilidad angelical; es la velocidad con la que registras el desequilibrio y la compasión con la que guías a tus dos mentes de regreso al centro.</strong></p>
+      </div>
+    `
+  },
+  {
+    id: 'cap11',
+    navLabel: 'Capítulo 11 · Plenitud en lo cotidiano',
+    section: 'PARTE III — La integración',
+    render: () => `
+      <div class="chapter-header">
+        <span class="chapter-label">Capítulo 11</span>
+        <h1 class="chapter-title">La Plenitud en la Vida Cotidiana</h1>
+        <p class="chapter-subtitle">Cómo se ve esto en el trabajo, el cuerpo y el amor</p>
+      </div>
+      <div class="chapter-content">
+        <p>La síntesis superior de <em>Ni Frío Ni Fuego</em> no puede confinarse al diván del terapeuta ni a la quietud de una sala de meditación. Debe manifestarse en el lodo cotidiano de la civilización hipermoderna: en la forma en que gestionamos nuestras finanzas, en nuestro consumo de pantallas digitales, en la administración de nuestras alianzas laborales y en la soberanía sobre el tiempo escaso de nuestra existencia.</p>
+
+        <h2>Dinero y consumo compensatorio</h2>
+        <p>El dinero es, quizás, la variable de la vida moderna que padece una mayor distorsión por desintegración mental. El intelecto racional concibe el dinero de forma estrictamente aritmética: un medio de intercambio, una herramienta de inversión o una métrica cuantitativa de seguridad financiera. Sin embargo, la Mente Instintiva proyecta sobre el dinero un denso entramado de necesidades emocionales insatisfechas.</p>
+        <p>Aquí eclosiona el fenómeno del <strong>consumo compensatorio</strong>. Cuando un individuo hiper-racional pasa una jornada de doce horas ejecutando tareas corporativas que carecen por completo de significado para su corazón, su sistema emocional acumula un severo déficit de vitalidad. Al salir de la oficina, su Mente Instintiva lo empuja a adquirir un vehículo de lujo que no necesita. No está adquiriendo un bien material; está intentando inyectarse un pico efímero de dopamina para anestesiar el dolor de una vida desintegrada.</p>
+
+        <h2>Tecnología y el secuestro dopaminérgico</h2>
+        <p>Los smartphones y las plataformas de redes sociales contemporáneas constituyen las armas de distracción masiva más formidables de la historia. Están milimétricamente diseñadas con un único objetivo: secuestrar los circuitos evolutivos de tu Mente Instintiva mediante el diseño de recompensas variables intermitentes. Cada <em>like</em>, cada notificación lumínica y cada scroll infinito activa idéntico sustrato neural que una máquina tragamonedas en un casino.</p>
+        <p>La Inteligencia Integradora aborda la sobriedad digital desde una perspectiva sistémica: comprende que la adicción a las pantallas es la consecuencia directa de un vacío de presencia en el mundo real.</p>
+
+        <h2>La soberanía del tiempo</h2>
+        <p>Vivimos inmersos en la patología colectiva de la prisa crónica, una prisa que confunde de manera trágica el movimiento acelerado con el avance significativo.</p>
+        <p>Frente a esta patología, la Inteligencia Integradora rescata la práctica revolucionaria del <strong>Tiempo de No-Hacer</strong>. No se trata de practicar meditación zen persiguiendo la iluminación mística; se trata del acto subversivo de agendar bloques de tiempo semanales desprovistos de cualquier objetivo de rendimiento, métrica o utilidad.</p>
+        <p>La neurociencia contemporánea demuestra que es precisamente en este estado de aparente ociosidad —cuando se activa la Red Neuronal por Defecto— cuando el cerebro ejecuta sus funciones más elevadas de integración profunda: consolida la memoria afectiva, procesa los dolores emocionales latentes y gesta las ideas creativas más revolucionarias de la razón. <strong>El tiempo que le regalas al aparente vacío es el pegamento biológico que unifica todo lo demás.</strong></p>
+      </div>
+    `
+  },
+  {
+    id: 'cap12',
+    navLabel: 'Capítulo 12 · El Punto Donde Todo Se Funde',
+    section: 'PARTE III — La integración',
+    render: () => `
+      <div class="chapter-header">
+        <span class="chapter-label">Capítulo 12</span>
+        <h1 class="chapter-title">El Punto Donde Todo Se Funde</h1>
+        <p class="chapter-subtitle">Una síntesis final y un comienzo real</p>
+      </div>
+      <div class="chapter-content">
+        <p>Hemos culminado nuestra travesía cartográfica por el interior de la mente humana. A lo largo de estas páginas, hemos desmontado la falacia histórica de la oposición entre pensar y sentir, explorado las patologías de la desintegración y provisto las herramientas conceptuales y corporativas para edificar un centro de gravedad soberano.</p>
+        <p>Llegados a este punto, emerge con absoluta claridad una ley sistémica inmutable que unifica la totalidad de la experiencia humana:</p>
+        <blockquote><p>La salud mental, biológica y relacional brota de la integración. La neurosis, el sufrimiento y la enfermedad existencial emergen de la división.</p></blockquote>
+        <p>La plenitud no es una meta utópica exenta de fricciones que aguarda al final de un camino místico; es la madurez existencial de deponer las armas en la guerra civil que libras dentro de tu propio cráneo.</p>
+
+        <h2>Manifiesto Ni Frío Ni Fuego</h2>
+        <p style="margin-bottom:1.5rem; color:var(--white-muted); font-family:var(--font-head); font-size:0.75rem; letter-spacing:0.2em; text-transform:uppercase;">Diez principios para la soberanía del ser</p>
+        <ul class="principles-list">
+          <li><strong>La plenitud es integración, no anestesia.</strong> La meta de la existencia no es erradicar el dolor, silenciar la ira ni suprimir el miedo, sino desarrollar el contenedor de conciencia lo suficientemente amplio y fuerte como para acogerlos, descifrar su información biológica y darles una dirección noble con la razón.</li>
+          <li><strong>El cuerpo es el escenario de la verdad psíquica.</strong> El intelecto posee una capacidad infinita para redactar narrativas de autoengaño. El cuerpo jamás miente. Tu tensión muscular, tu respiración y tu opresión somática constituyen el archivo real de tus emociones no procesadas; escúchalas como datos sagrados.</li>
+          <li><strong>La razón es el arquitecto; la emoción es el combustible.</strong> Una existencia regida exclusivamente por la lógica es una estructura geométrica perfecta pero estéril e incorpórea (jaula). Una existencia entregada al impulso de la emoción es un río desbordado que destruye sus propios márgenes (caos).</li>
+          <li><strong>Para alcanzar el centro, debes habitar la incomodidad de tu extremo opuesto.</strong> Si tu tendencia innata es hiper-racional, tu senda de crecimiento exige descender al cuerpo, validar tu vulnerabilidad y exponerte al dolor del sentir.</li>
+          <li><strong>Ponerle nombre preciso al dolor es el primer acto de soberanía intelectual.</strong> El analfabetismo emocional te condena a la reactividad animal. Cultivar la granularidad emocional desactiva la alarma límbica y devuelve el timón existencial al lóbulo prefrontal.</li>
+          <li><strong>Un límite integrado es un acto de amor bilingüe.</strong> Enuncia tus límites con la calidez y empatía del corazón, pero sostenlos con la firmeza inflexible y la claridad semántica del intelecto.</li>
+          <li><strong>Las grandes decisiones exigen el aval de las dos mentes.</strong> Aplica con rigor el Método de los Tres Tiempos antes de dar un paso definitivo.</li>
+          <li><strong>La prisa crónica es la anestesia del alma desintegrada.</strong> Reclama tu derecho inalienable al Tiempo de No-Hacer; el vacío aparente es el único útero donde madura la verdadera claridad.</li>
+          <li><strong>Los conflictos relacionales son protestas de seguridad amigdalina.</strong> Aprende a descifrar la vulnerabilidad desprotegida oculta detrás del ataque de tu pareja y activa el protocolo de reparación integrada antes de que el vitriolo calcine el vínculo.</li>
+          <li><strong><span class="fire">Ni frío</span> que congele la vida, <span class="fire">ni fuego</span> que la consuma en cenizas.</strong> La sabiduría humana habita en esa temperatura templada, activa y soberana que se denomina Plenitud.</li>
+        </ul>
+      </div>
+    `
+  },
+  {
+    id: 'epilogo',
+    navLabel: 'Epílogo',
+    section: null,
+    render: () => `
+      <div class="chapter-header">
+        <span class="chapter-label">Epílogo</span>
+        <h1 class="chapter-title">La última cosa que quiero decirte</h1>
+      </div>
+      <div class="chapter-content">
+        <p>La última cosa que deseo entregarte en este volumen no constituye una tesis novedosa. La has escuchado con anterioridad, bajo ropajes semánticos diversos, a lo largo de tu andadura por este mundo. Sin embargo, tras haber desmantelado juntos la anatomía de tu división interior, confío en que tu conciencia la reciba con una resonancia enteramente renovada:</p>
+        <blockquote><p>Eres suficientemente inteligente. Y eres suficientemente humano. El trabajo más transformador de tu existencia consiste en descubrir que ambas verdades son, en realidad, exactamente la misma cosa.</p></blockquote>
+        <p>La única inteligencia que posee verdadero valor existencial no es aquella que te permite resolver con brillantez exámenes académicos abstractos o acumular ceros en tus cuentas bancarias a costa de tu salud vincular. La inteligencia real es aquella que te capacita para navegar la majestuosa y desgarradora complejidad de una vida humana real, con todas sus contradicciones, sus pérdidas y sus bellezas indomables, sin fragmentar tu carácter ni traicionar tu dignidad en el intento.</p>
+        <p>Y esa inteligencia no tiene por qué elegir entre el cerebro que computa la lógica y el corazón que experimenta la vibración del mundo. Llevas toda tu andadura civil provisto de estas dos herramientas formidables. Lo único que te faltaba era el mapa arquitectónico para comprender cómo utilizarlas al unísono. Ahora que posees la cartografía, la responsabilidad de encender el motor de la integración te pertenece por entero.</p>
+        <div class="text-divider">FIN</div>
+      </div>
+    `
+  },
+  {
+    id: 'referencias',
+    navLabel: 'Referencias',
+    section: null,
+    render: () => `
+      <div class="chapter-header">
+        <span class="chapter-label">Apéndice</span>
+        <h1 class="chapter-title">Referencias y Lecturas Recomendadas</h1>
+      </div>
+      <div class="chapter-content">
+        <p>Este tratado se edifica sobre los cimientos científicos de décadas de investigación rigurosa en los campos de la neurociencia cognitiva, la psicología clínica del apego y la filosofía práctica.</p>
+
+        <h2>Neurociencia y Cognición</h2>
+        <ul>
+          <li><strong>Damasio, Antonio (1994).</strong> <em>El error de Descartes: La emoción, la razón y el cerebro humano.</em> Barcelona: Crítica.</li>
+          <li><strong>Kahneman, Daniel (2011).</strong> <em>Pensar rápido, pensar despacio.</em> Madrid: Debate.</li>
+          <li><strong>Feldman Barrett, Lisa (2017).</strong> <em>How Emotions Are Made: The Secret Life of the Brain.</em> New York: Houghton Mifflin Harcourt.</li>
+          <li><strong>Van der Kolk, Bessel (2014).</strong> <em>El cuerpo lleva la cuenta: Cerebro, mente y cuerpo en la superación del trauma.</em> Barcelona: Eleftheria.</li>
+        </ul>
+
+        <h2>Psicología Clínica e Inteligencia Relacional</h2>
+        <ul>
+          <li><strong>Goleman, Daniel (1995).</strong> <em>Inteligencia emocional.</em> Barcelona: Kairós.</li>
+          <li><strong>Johnson, Sue (2008).</strong> <em>Hold Me Tight: Seven Conversations for a Lifetime of Love.</em> New York: Little, Brown & Company.</li>
+          <li><strong>Bolte Taylor, Jill (2008).</strong> <em>Un ataque de lucidez: Vivencias de una neurocientífica.</em> Madrid: Debate.</li>
+        </ul>
+
+        <h2>Filosofía Existencial</h2>
+        <ul>
+          <li><strong>Aristóteles.</strong> <em>Ética a Nicómaco.</em></li>
+          <li><strong>Frankl, Viktor (1946).</strong> <em>El hombre en busca de sentido.</em> Barcelona: Herder.</li>
+        </ul>
+      </div>
+    `
+  },
+  {
+    id: 'autor',
+    navLabel: 'Sobre el autor',
+    section: null,
+    render: () => `
+      <div class="chapter-header">
+        <span class="chapter-label">Sobre el autor</span>
+        <h1 class="chapter-title">Alexis Jaramillo</h1>
+      </div>
+      <div class="chapter-content">
+        <p><strong>Alexis Jaramillo</strong> es escritor y observador del comportamiento humano. Su trabajo surge de la reflexión constante sobre las tensiones que habitan la experiencia humana: razón y emoción, conflicto y plenitud, miedo y libertad.</p>
+        <p>A través de sus escritos explora las dinámicas internas que condicionan la forma en que las personas piensan, sienten, deciden y construyen sus relaciones. Su enfoque integra elementos de la filosofía práctica, la psicología contemporánea y la observación directa de la vida cotidiana, con el propósito de ofrecer herramientas de comprensión accesibles y aplicables.</p>
+        <p><em>Ni Frío Ni Fuego</em> nace de la convicción de que la plenitud no se encuentra en los extremos, sino en la capacidad de integrar aquello que suele vivirse como opuesto. Más que ofrecer respuestas definitivas, su obra busca abrir espacios de reflexión que permitan a cada lector comprenderse con mayor profundidad y vivir desde una mayor coherencia interior.</p>
+        <p>Si este libro te ha acompañado a mirar aspectos de ti mismo que antes permanecían ocultos, la conversación no tiene por qué terminar aquí. Comparte estas ideas con quienes puedan beneficiarse de ellas y continúa explorando los principios de la Inteligencia Integradora, el desarrollo de la consciencia y la construcción de una vida más plena y equilibrada.</p>
+        <div style="margin-top:3rem; padding:2rem; background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:4px; text-align:center;">
+          <p style="font-family:var(--font-head); font-size:0.65rem; font-weight:700; letter-spacing:0.3em; text-transform:uppercase; color:var(--grey); margin-bottom:1rem;">Contacto y Comunidad</p>
+          <p style="font-family:var(--font-body); font-size:0.9rem; color:var(--white-muted); font-style:italic; margin:0;">Para conocer nuevos contenidos, publicaciones y futuros proyectos,<br/>visita los canales oficiales de la comunidad Ni Frío Ni Fuego.</p>
+        </div>
+      </div>
+    `
+  }
+];
+
+/* ═══════════════════════════════════════
+   STATE
+═══════════════════════════════════════ */
+let currentIdx = 0;
+const STORAGE_KEY = 'nfnf_lib_state';
+
+function loadState() {
+  try {
+    const s = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    return s;
+  } catch { return {}; }
+}
+
+function saveState(idx, scrollTop) {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ idx, scrollTop }));
+  } catch {}
+}
+
+/* ═══════════════════════════════════════
+   BUILD NAV
+═══════════════════════════════════════ */
+function buildNav() {
+  const nav = document.getElementById('sidebarNav');
+  let currentSection = null;
+  let html = '';
+
+  CHAPTERS.forEach((ch, idx) => {
+    if (ch.section !== currentSection) {
+      currentSection = ch.section;
+      if (currentSection) {
+        html += `<div class="nav-section"><div class="nav-section__label">${currentSection}</div>`;
+      } else {
+        html += `<div class="nav-section">`;
+      }
+    }
+
+    html += `<button class="nav-item" data-idx="${idx}" aria-current="${idx === currentIdx ? 'page' : 'false'}">
+      <span class="nav-item__dot"></span>
+      <span>${ch.navLabel}</span>
+    </button>`;
+
+    // Close section if next has different section or is last
+    const next = CHAPTERS[idx + 1];
+    if (!next || next.section !== currentSection) {
+      html += `</div>`;
+    }
+  });
+
+  // Re-inject continue btn and nav
+  const continueBtn = document.getElementById('continueBtn');
+  nav.innerHTML = '';
+  nav.appendChild(continueBtn);
+  nav.insertAdjacentHTML('beforeend', html);
+
+  // Events
+  nav.querySelectorAll('.nav-item').forEach(btn => {
+    btn.addEventListener('click', () => {
+      goToChapter(parseInt(btn.dataset.idx));
+      closeSidebar();
+    });
+  });
+}
+
+/* ═══════════════════════════════════════
+   RENDER CHAPTER
+═══════════════════════════════════════ */
+function goToChapter(idx, scrollTop = 0) {
+  currentIdx = Math.max(0, Math.min(idx, CHAPTERS.length - 1));
+  const ch = CHAPTERS[currentIdx];
+
+  // Render
+  const area = document.getElementById('readingArea');
+  area.innerHTML = ch.render() + renderChapterNavFooter();
+
+  // Footer nav buttons
+  const prevFooter = area.querySelector('#footerPrev');
+  const nextFooter = area.querySelector('#footerNext');
+  if (prevFooter) prevFooter.addEventListener('click', () => goToChapter(currentIdx - 1));
+  if (nextFooter) nextFooter.addEventListener('click', () => goToChapter(currentIdx + 1));
+
+  // Update topbar
+  document.getElementById('topbarChapter').textContent = ch.navLabel;
+
+  // Scroll main area
+  const mainEl = document.getElementById('mainArea');
+  mainEl.scrollTop = scrollTop;
+
+  // Update nav highlight
+  document.querySelectorAll('.nav-item').forEach((btn, i) => {
+    btn.classList.toggle('active', i === currentIdx);
+    btn.setAttribute('aria-current', i === currentIdx ? 'page' : 'false');
+  });
+
+  // Sidebar scroll to active
+  const activeItem = document.querySelector('.nav-item.active');
+  if (activeItem) activeItem.scrollIntoView({ block: 'nearest' });
+
+  // Update prev/next arrows
+  document.getElementById('prevBtn').dataset.disabled = currentIdx === 0 ? 'true' : 'false';
+  document.getElementById('nextBtn').dataset.disabled = currentIdx === CHAPTERS.length - 1 ? 'true' : 'false';
+
+  // Update progress
+  updateProgress();
+
+  // Save
+  saveState(currentIdx, 0);
+}
+
+function renderChapterNavFooter() {
+  const prev = CHAPTERS[currentIdx - 1];
+  const next = CHAPTERS[currentIdx + 1];
+  return `
+    <div class="chapter-nav-footer">
+      <button class="chapter-nav-btn" id="footerPrev" ${!prev ? 'data-disabled="true"' : ''}>
+        <span class="chapter-nav-btn__dir">← Anterior</span>
+        <span class="chapter-nav-btn__title">${prev ? prev.navLabel : '—'}</span>
+      </button>
+      <button class="chapter-nav-btn right" id="footerNext" ${!next ? 'data-disabled="true"' : ''}>
+        <span class="chapter-nav-btn__dir">Siguiente →</span>
+        <span class="chapter-nav-btn__title">${next ? next.navLabel : '—'}</span>
+      </button>
+    </div>
+  `;
+}
+
+/* ═══════════════════════════════════════
+   PROGRESS
+═══════════════════════════════════════ */
+function updateProgress() {
+  const pct = Math.round((currentIdx / (CHAPTERS.length - 1)) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressPct').textContent = pct + '%';
+}
+
+/* ═══════════════════════════════════════
+   READING PROGRESS LINE (scroll)
+═══════════════════════════════════════ */
+const mainEl = document.getElementById('mainArea');
+const readingLine = document.getElementById('readingLine');
+
+mainEl.addEventListener('scroll', () => {
+  const { scrollTop, scrollHeight, clientHeight } = mainEl;
+  const progress = scrollTop / (scrollHeight - clientHeight);
+  readingLine.style.transform = `scaleX(${isNaN(progress) ? 0 : progress})`;
+  // Autosave scroll position
+  saveState(currentIdx, scrollTop);
+}, { passive: true });
+
+/* ═══════════════════════════════════════
+   NAV ARROWS (topbar)
+═══════════════════════════════════════ */
+document.getElementById('prevBtn').addEventListener('click', () => {
+  if (currentIdx > 0) goToChapter(currentIdx - 1);
+});
+document.getElementById('nextBtn').addEventListener('click', () => {
+  if (currentIdx < CHAPTERS.length - 1) goToChapter(currentIdx + 1);
+});
+
+/* ═══════════════════════════════════════
+   RESOURCES DROPDOWN
+═══════════════════════════════════════ */
+const resourcesBtn = document.getElementById('resourcesBtn');
+const resourcesDropdown = document.getElementById('resourcesDropdown');
+
+resourcesBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  const isOpen = resourcesDropdown.classList.toggle('open');
+  resourcesBtn.setAttribute('aria-expanded', isOpen);
+});
+
+document.addEventListener('click', () => {
+  resourcesDropdown.classList.remove('open');
+  resourcesBtn.setAttribute('aria-expanded', 'false');
+});
+
+/* ═══════════════════════════════════════
+   AUDIO MODAL
+═══════════════════════════════════════ */
+const audioModal = document.getElementById('audioModal');
+const audioBtn = document.getElementById('audioBtn');
+const audioModalClose = document.getElementById('audioModalClose');
+
+audioBtn.addEventListener('click', () => {
+  audioModal.classList.add('open');
+  resourcesDropdown.classList.remove('open');
+});
+audioModalClose.addEventListener('click', () => audioModal.classList.remove('open'));
+audioModal.addEventListener('click', (e) => {
+  if (e.target === audioModal) audioModal.classList.remove('open');
+});
+
+/* ═══════════════════════════════════════
+   MOBILE SIDEBAR
+═══════════════════════════════════════ */
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const sidebar = document.getElementById('sidebar');
+const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+function openSidebar() {
+  sidebar.classList.add('open');
+  sidebarOverlay.classList.add('open');
+  hamburgerBtn.setAttribute('aria-expanded', 'true');
+}
+
+function closeSidebar() {
+  sidebar.classList.remove('open');
+  sidebarOverlay.classList.remove('open');
+  hamburgerBtn.setAttribute('aria-expanded', 'false');
+}
+
+hamburgerBtn.addEventListener('click', () => {
+  sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+});
+sidebarOverlay.addEventListener('click', closeSidebar);
+
+/* ═══════════════════════════════════════
+   KEYBOARD NAVIGATION
+═══════════════════════════════════════ */
+document.addEventListener('keydown', (e) => {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { if (currentIdx > 0) goToChapter(currentIdx - 1); }
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { if (currentIdx < CHAPTERS.length - 1) goToChapter(currentIdx + 1); }
+  if (e.key === 'Escape') { audioModal.classList.remove('open'); closeSidebar(); }
+});
+
+/* ═══════════════════════════════════════
+   INIT
+═══════════════════════════════════════ */
+(function init() {
+  const saved = loadState();
+  buildNav();
+
+  if (saved.idx !== undefined && saved.idx >= 0 && saved.idx < CHAPTERS.length) {
+    // Show continue button
+    const continueBtn = document.getElementById('continueBtn');
+    continueBtn.style.display = 'flex';
+    continueBtn.textContent = '';
+    continueBtn.innerHTML = `<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Continuar: ${CHAPTERS[saved.idx].navLabel}`;
+    continueBtn.addEventListener('click', () => {
+      goToChapter(saved.idx, saved.scrollTop || 0);
+      // restore scroll after render
+      setTimeout(() => { mainEl.scrollTop = saved.scrollTop || 0; }, 50);
+      closeSidebar();
+    });
+    goToChapter(saved.idx, saved.scrollTop || 0);
+  } else {
+    goToChapter(0);
+  }
+
+
+})();
+
+const themeToggle = document.getElementById('themeToggle');
+
+themeToggle.addEventListener('click', () => {
+
+  document.body.classList.toggle('light-theme');
+
+  if(document.body.classList.contains('light-theme')){
+    themeToggle.textContent = '☀️ Claro';
+  } else {
+    themeToggle.textContent = '🌙 Oscuro';
+  }
+
+});
+
+</script>
+
+</body>
+</html>
