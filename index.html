@@ -1299,7 +1299,7 @@ section { position: relative; overflow: hidden; }
         </p>
 
         <div class="hero__cta-group fade-up fade-up-delay-4">
-          <a href="https://mpago.li/34eKFh7" target="_blank" class="btn btn--primary" aria-label="Quiero leer Ni Frío Ni Fuego">
+          <a href="javascript:handleCheckout()" target="_blank" class="btn btn--primary" aria-label="Quiero leer Ni Frío Ni Fuego">
   <span>QUIERO LEER NI FRÍO NI FUEGO</span>
   <svg class="btn-arrow" viewBox="0 0 18 18" fill="none" aria-hidden="true">
     ...
@@ -1373,7 +1373,7 @@ section { position: relative; overflow: hidden; }
     </div>
 
     <div class="vsl__cta">
-<a href="https://mpago.li/34eKFh7" class="btn btn--primary" aria-label="Quiero leer Ni Frío Ni Fuego" target="_blank">
+<a href="javascript:handleCheckout()" class="btn btn--primary" aria-label="Quiero leer Ni Frío Ni Fuego" target="_blank">
   <span>QUIERO LEER NI FRÍO NI FUEGO</span>
       </a>
     </div>
@@ -1536,7 +1536,7 @@ section { position: relative; overflow: hidden; }
     </div>
 
     <div class="text-center mt-4" style="padding-top:3rem;">
-  <a href="https://mpago.li/34eKFh7"
+  <a href="javascript:handleCheckout()"
      target="_blank"
      class="btn btn--primary">
     <span>QUIERO ESTE LIBRO</span>
@@ -1860,7 +1860,7 @@ Pago seguro con Mercado Pago • Acceso inmediato • Biblioteca privada online 
     </p>
 
     <div class="fade-up fade-up-delay-3">
-      <a href="https://mpago.li/34eKFh7"
+      <a href="javascript:handleCheckout()"
    target="_blank"
    class="btn btn--primary"
    style="padding:1.3rem 3.5rem;"
@@ -1975,13 +1975,23 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 /* Checkout Mercado Pago */
 
 
-function handleCheckout() {
-  /* Checkout Mercado Pago */
+async function handleCheckout() {
+  try {
 
-function handleCheckout() {
-  window.open('https://mpago.li/34eKFh7', '_blank');
-}
-  window.open('https://mpago.li/34eKFh7', '_blank');
+    const response = await fetch('/.netlify/functions/create-checkout');
+
+    const data = await response.json();
+
+    if (data.init_point) {
+      window.location.href = data.init_point;
+    } else {
+      alert('Error al generar el checkout');
+    }
+
+  } catch (error) {
+    console.error(error);
+    alert('Error de conexión');
+  }
 }
 
 /* ── Spiral animation subtle rotation ── */
