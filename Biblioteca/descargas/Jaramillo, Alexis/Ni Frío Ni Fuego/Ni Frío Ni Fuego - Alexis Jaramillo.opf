@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="uuid_id" version="2.0">
+    <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+        <dc:identifier opf:scheme="calibre" id="calibre_id">5</dc:identifier>
+        <dc:identifier opf:scheme="uuid" id="uuid_id">19caf1a8-e2f6-4cd6-8501-f6320dcf64ec</dc:identifier>
+        <dc:title>Ni Frío Ni Fuego</dc:title>
+        <dc:creator opf:file-as="Jaramillo, Alexis" opf:role="aut">Alexis Jaramillo</dc:creator>
+        <dc:contributor opf:file-as="calibre" opf:role="bkp">calibre (9.9.0) [https://calibre-ebook.com]</dc:contributor>
+        <dc:date>0101-01-01T00:00:00+00:00</dc:date>
+        <dc:description>&lt;div&gt;
+&lt;p&gt;Comprender la razón y la emoción para integrarlas conscientemente y alcanzar una vida más plena. Una exploración profunda del comportamiento humano, el equilibrio interior y el punto donde mente y corazón dejan de ser enemigos.&lt;/p&gt;&lt;/div&gt;</dc:description>
+        <dc:language>spa</dc:language>
+        <dc:subject>Desarrollo personal</dc:subject>
+        <dc:subject>Filosofía práctica</dc:subject>
+        <dc:subject>Psicología</dc:subject>
+        <dc:subject>Inteligencia emocional</dc:subject>
+        <dc:subject>Plenitud</dc:subject>
+        <meta name="calibre:timestamp" content="2026-06-04T23:21:51.875661+00:00"/>
+        <meta name="calibre:title_sort" content="Ni Frío Ni Fuego"/>
+    </metadata>
+    <guide>
+        <reference type="cover" title="Portada" href="Ni Frío Ni Fuego - Alexis Jaramillo.jpg"/>
+    </guide>
+</package>
