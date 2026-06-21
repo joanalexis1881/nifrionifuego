@@ -15,7 +15,7 @@ exports.handler = async () => {
             title: "Ni Frío Ni Fuego",
             quantity: 1,
             currency_id: "COP",
-            unit_price: 1000
+            unit_price: 4000
           }
         ],
         back_urls: {
