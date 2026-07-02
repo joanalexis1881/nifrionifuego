@@ -85,37 +85,22 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
 }
 
 .sidebar__cover {
-  width: 80px;
-  height: 110px;
-  background: linear-gradient(135deg, var(--red) 0%, #3a0808 100%);
-  border-radius: 3px;
-  margin-bottom: 1.25rem;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.6);
-  flex-shrink: 0;
+    width: 80px;
+    height: 110px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+    flex-shrink: 0;
 }
 
-.sidebar__cover::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(215,243,245,0.15) 0%, transparent 60%);
+.sidebar__cover-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
-.sidebar__cover-text {
-  position: absolute;
-  bottom: 6px;
-  left: 6px;
-  right: 6px;
-  font-family: var(--font-head);
-  font-weight: 900;
-  font-size: 0.45rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.7);
-  line-height: 1.3;
-}
+
 
 .sidebar__book-title {
   font-family: var(--font-head);
@@ -827,29 +812,27 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   <aside class="sidebar" id="sidebar" role="complementary" aria-label="Navegación del libro">
 
     <div class="sidebar__head">
-      <div style="display:flex; gap:1rem; align-items:flex-start;">
-        <div class="sidebar__cover" aria-hidden="true">
-          <svg viewBox="0 0 80 110" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%;">
-            <rect width="80" height="110" fill="url(#covGrad)"/>
-            <defs>
-              <linearGradient id="covGrad" x1="0" y1="0" x2="80" y2="110" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stop-color="#8E1D1A"/>
-                <stop offset="100%" stop-color="#1a0505"/>
-              </linearGradient>
-            </defs>
-            <!-- Flame shape -->
-            <path d="M40 22 C40 22 52 34 52 46 C52 54 46 60 40 62 C34 60 28 54 28 46 C28 34 40 22 40 22Z" fill="rgba(215,243,245,0.12)"/>
-            <!-- Ice crystal -->
-            <path d="M40 65 L34 75 L40 85 L46 75 Z" fill="rgba(215,243,245,0.08)"/>
-            <line x1="40" y1="62" x2="40" y2="88" stroke="rgba(215,243,245,0.15)" stroke-width="0.8"/>
-          </svg>
-          <div class="sidebar__cover-text">Ni Frío<br/>Ni Fuego</div>
-        </div>
-        <div>
-          <div class="sidebar__book-title">Ni Frío<br/>Ni Fuego</div>
-          <div class="sidebar__author">Alexis Jaramillo</div>
-        </div>
+  <div style="display:flex; gap:1rem; align-items:flex-start;">
+
+    <div class="sidebar__cover">
+      <img
+        src="portada-libro.jpg"
+        alt="Ni Frío Ni Fuego"
+        class="sidebar__cover-image"
+      >
+    </div>
+
+    <div>
+      <div class="sidebar__book-title">
+        Ni Frío<br>Ni Fuego
       </div>
+
+      <div class="sidebar__author">
+        Alexis Jaramillo
+      </div>
+    </div>
+
+  </div>
 
       <div class="sidebar__progress-wrap">
         <div class="sidebar__progress-label">
