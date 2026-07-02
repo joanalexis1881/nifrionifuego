@@ -8,9 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,300;1,400&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet"/>
-<link rel="icon" href="favicon.ico">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
 <style>
 /* ═══════════════════════════════════════════════════════════════
    TOKENS & RESET
@@ -21,7 +19,7 @@
   --black-card:   #161616;
   --red:          #8E1D1A;
   --red-light:    #D6453D;
-  --ice:          #e5efef;
+  --ice:          #D7F3F5;
   --ice-dim:      #9FB9D4;
   --grey:         #6B6B6B;
   --grey-light:   #A0A0A0;
@@ -37,89 +35,6 @@
   --font-body:    'Lora', Georgia, serif;
 }
 
-.theme-toggle{
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-
-  padding: 0.55rem 1.1rem;
-
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 3px;
-
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-
-  color: var(--white-dim);
-  transition: all .25s;
-  transition: all .35s ease;
-}
-
-.theme-toggle:hover{
-  border-color: var(--red-light);
-  color: var(--white);
-  background: rgba(214,69,61,0.08);
-}
-
-body.light-theme {
-
-  --black: #f6f2eb;
-  --black-soft: #fdfaf5;
-  --black-card: #fffdf9;
-
-  --white: #111111;
-  --ice: #B8C9DA;
-
-  --white-dim: rgba(0,0,0,0.75);
-  --white-muted: rgba(0,0,0,0.55);
-  --white-faint: rgba(0,0,0,0.12);
-
-  --border: rgba(0,0,0,0.12);
-  --border-soft: rgba(0,0,0,0.08);
-
-}
-
-body.light-theme .reflexion__label{
-    color: #6E86A5;
-}
-
-body.light-theme .reflexion p{
-    color: #44566C;
-}
-body.light-theme .reflexion{
-    background: #F1EEE8;
-    border: 1px solid rgba(0,0,0,0.08);
-}
-
-/* ===== THEME TRANSITIONS ===== */
-
-.sidebar,
-.topbar,
-.main,
-.resources-btn,
-.theme-toggle,
-.chapter,
-.chapter-content,
-.chapter-header,
-.sidebar__nav,
-.sidebar__head,
-.sidebar__progress-bar,
-.sidebar__progress-fill,
-.nav-arrow,
-.modal,
-.modal-overlay {
-
-  transition:
-    background-color .45s cubic-bezier(0.25,0.46,0.45,0.94),
-    color .45s cubic-bezier(0.25,0.46,0.45,0.94),
-    border-color .45s cubic-bezier(0.25,0.46,0.45,0.94),
-    box-shadow .45s cubic-bezier(0.25,0.46,0.45,0.94);
-
-}
-
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { font-size: 16px; height: 100%; }
 
@@ -132,10 +47,6 @@ body {
   height: 100%;
   overflow: hidden;
   -webkit-font-smoothing: antialiased;
-
-  transition:
-    background-color .45s cubic-bezier(0.25,0.46,0.45,0.94),
-    color .45s cubic-bezier(0.25,0.46,0.45,0.94);
 }
 
 ::selection { background: var(--red); color: var(--white); }
@@ -184,18 +95,8 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   box-shadow: 0 8px 30px rgba(0,0,0,0.6);
   flex-shrink: 0;
 }
-.sidebar__cover-image{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-    z-index:10;
-}
 
 .sidebar__cover::before {
-  z-index: 20;
   content: '';
   position: absolute;
   inset: 0;
@@ -374,7 +275,7 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   align-items: center;
   justify-content: space-between;
   padding: 1rem 2.5rem;
-  background: var(--black-soft);
+  background: rgba(10,10,10,0.92);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
   gap: 1rem;
@@ -510,15 +411,16 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
    READING CONTENT AREA
 ══════════════════════════════════════ */
 .reading-area {
-    max-width: 700px;
-    margin: 0 auto;
-    padding: 2rem 3rem 8rem;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 5rem 3rem 8rem;
 }
 
 /* Chapter header */
 .chapter-header {
-    margin-bottom: 2rem;
-    padding-bottom: 1.5rem;
+  margin-bottom: 4rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--border);
 }
 
 .chapter-label {
@@ -603,10 +505,6 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   color: var(--ice-dim);
 }
 
-body.light-theme .reading-area em {
-  color: #5F7898;
-}
-
 /* Blockquote */
 .reading-area blockquote {
   border-left: 2px solid var(--red);
@@ -639,7 +537,7 @@ body.light-theme .reading-area em {
   font-size: 0.62rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--white-dim);
+  color: var(--ice-dim);
   margin-bottom: 0.75rem;
   display: block;
 }
@@ -647,7 +545,7 @@ body.light-theme .reading-area em {
 .reflexion p {
   font-family: var(--font-body);
   font-size: 0.95rem;
-  color: var(--white-dim); 
+  color: rgba(215,243,245,0.7);
   margin: 0;
   line-height: 1.85;
 }
@@ -902,7 +800,7 @@ body.light-theme .reading-area em {
    FIRE / ICE ACCENTS (from brand)
 ══════════════════════════════════════ */
 .fire { color: var(--red-light); }
-.ice  { color: var(--ice); }
+.ice  { color: var(--ice-dim); }
 
 /* FADE IN ANIMATION */
 .chapter-content { animation: fadeIn 0.4s ease; }
@@ -931,13 +829,21 @@ body.light-theme .reading-area em {
     <div class="sidebar__head">
       <div style="display:flex; gap:1rem; align-items:flex-start;">
         <div class="sidebar__cover" aria-hidden="true">
-
-          <img
-src="portada-libro.jpg"
-alt="Ni Frío Ni Fuego"
-class="sidebar__cover-image"
-/>
-
+          <svg viewBox="0 0 80 110" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%;">
+            <rect width="80" height="110" fill="url(#covGrad)"/>
+            <defs>
+              <linearGradient id="covGrad" x1="0" y1="0" x2="80" y2="110" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#8E1D1A"/>
+                <stop offset="100%" stop-color="#1a0505"/>
+              </linearGradient>
+            </defs>
+            <!-- Flame shape -->
+            <path d="M40 22 C40 22 52 34 52 46 C52 54 46 60 40 62 C34 60 28 54 28 46 C28 34 40 22 40 22Z" fill="rgba(215,243,245,0.12)"/>
+            <!-- Ice crystal -->
+            <path d="M40 65 L34 75 L40 85 L46 75 Z" fill="rgba(215,243,245,0.08)"/>
+            <line x1="40" y1="62" x2="40" y2="88" stroke="rgba(215,243,245,0.15)" stroke-width="0.8"/>
+          </svg>
+          <div class="sidebar__cover-text">Ni Frío<br/>Ni Fuego</div>
         </div>
         <div>
           <div class="sidebar__book-title">Ni Frío<br/>Ni Fuego</div>
@@ -992,8 +898,6 @@ class="sidebar__cover-image"
         <button class="nav-arrow" id="nextBtn" aria-label="Capítulo siguiente" title="Siguiente">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        
-        <button id="themeToggle" class="theme-toggle">🌙 Oscuro</button>
 
         <!-- Resources -->
         <div style="position:relative;">
@@ -1002,14 +906,14 @@ class="sidebar__cover-image"
             <span>Recursos</span>
           </button>
           <div class="resources-dropdown" id="resourcesDropdown" role="menu">
-            <a class="resources-item" href="descargas\Ni Frío Ni Fuego.pdf" download role="menuitem">
+            <a class="resources-item" href="ni_frio_ni_fuego.pdf" download role="menuitem">
               <span class="resources-item__icon">📄</span>
               <div class="resources-item__text">
                 <div class="resources-item__label">Descargar PDF</div>
                 <div class="resources-item__sub">Versión imprimible</div>
               </div>
             </a>
-            <a class="resources-item" href="descargas\Ni Frío Ni Fuego.epub"" download role="menuitem">
+            <a class="resources-item" href="Ni_Frío_Ni_Fuego_-_Alexis_Jaramillo.epub" download role="menuitem">
               <span class="resources-item__icon">📚</span>
               <div class="resources-item__text">
                 <div class="resources-item__label">Descargar EPUB</div>
@@ -1181,14 +1085,14 @@ const CHAPTERS = [
         <h2>Sesgos y trampas de ambos sistemas</h2>
         <p>Este diseño es una genialidad evolutiva para sobrevivir en la sabana de hace doscientos mil años, donde dudar ante un ruido entre la maleza significaba la muerte. Sin embargo, el mundo moderno no es la sabana. Cuando la Mente Instintiva se enfrenta a mercados financieros, contratos laborales o crisis matrimoniales, sus atajos se transforman en sesgos cognitivos autodestructivos:</p>
         <ul>
-          <li><strong>El sesgo de confirmación:</strong> Tu parte más emocional toma una decisión en una fracción de segundo y luego obliga a tu inteligencia a buscar —como sea— cualquier dato, artículo o recuerdo que le dé la razón. Al mismo tiempo, tu cerebro se vuelve completamente ciego ante cualquier prueba o argumento que demuestre que estás equivocado.</li>
-          <li><strong>La aversión a la pérdida:</strong> Nos duele el doble perder algo que ganar exactamente lo mismo. El golpe de perder cien dólares cala mucho más profundo que la alegría de ganarlos. Es por este miedo primitivo que terminamos atrapados en trabajos grises que odiamos o en relaciones marchitas que ya no dan más; preferimos aferrarnos a una seguridad precaria y conocida antes que arriesgarnos a perder lo poco que nos queda.</li>
+          <li><strong>El sesgo de confirmación:</strong> Tu mente límbica adopta una postura emocional inmediata y ordena a la razón buscar exclusivamente los datos que validen esa postura, ignorando cualquier evidencia en contrario.</li>
+          <li><strong>La aversión a la pérdida:</strong> El dolor neurológico de perder cien dólares es el doble de intenso que el placer de ganarlos, atrapándote en empleos grises o relaciones marchitas por el puro terror evolutivo a perder tu precaria seguridad.</li>
         </ul>
         <p>Pero la solución no consiste en hipertrofiar la Mente Reflexiva. Cuando esta se desconecta del sentir, engendra patologías cognitivas igual de paralizantes. La más célebre es la <em>parálisis por análisis</em>: un estado agónico donde el individuo evalúa tantas variables y escenarios posibles que es incapaz de dar un paso, ignorando que no decidir es, en sí mismo, una decisión con consecuencias.</p>
 
         <div class="reflexion">
           <span class="reflexion__label">✦ Reflexión 2 · Cartografía de tu fricción mental</span>
-          <p>Cada vez que te dices a ti mismo: “Sé perfectamente lo que tengo que hacer, pero no soy capaz”, estás viviendo en carne propia el divorcio entre tus dos mentes. Tu parte Reflexiva sabe cuál es el camino correcto, pero tu parte Instintiva se niega a arrancar porque siente un miedo primitivo que tu lógica no logra ver».</p>
+          <p>Cada vez que te descubras pronunciando la clásica frase: «Sé perfectamente lo que tengo que hacer, pero no me sale», estás presenciando un cisma entre tus dos mentes. La Reflexiva ha trazado la ruta correcta, pero la Instintiva se niega a encender el motor porque percibe un peligro invisible para el intelecto.</p>
         </div>
       </div>
     `
@@ -1236,9 +1140,9 @@ const CHAPTERS = [
         <p>Cuando la razón actúa en perfecta comunión con el sentir, ejerce funciones insustituibles: es capaz de contextualizar un impulso defensivo, simular las consecuencias a largo plazo de una respuesta visceral y construir la infraestructura de hábitos y disciplina necesaria para cuando la motivación emocional natural decaiga por completo.</p>
 
         <h2>La patología de la intelectualización</h2>
-        <p>El abuso de la razón se nota muchísimo cuando usamos la mente como un escondite. Quienes sufrieron heridas o rechazos profundos en su infancia suelen refugiarse en el piso más alto de su cabeza. Analizan sus propias tragedias como si le hubieran pasado a un extraño, hablan de sus divorcios con la frialdad de un cirujano y explican sus vacíos emocionales usando conceptos elegantes.</p>
-<p>Se convencen a sí mismos de que son personas muy maduras y objetivas, cuando la realidad es que están usando las palabras y la lógica como un chaleco antibalas para no sentir el dolor en su propia carne. Es una estrategia que funciona al principio para protegerse, pero que a la larga te condena a una vida de plástico, desconectado de tu propio cuerpo, donde conectar de verdad con otra persona se vuelve imposible porque <strong>la intimidad real exige, por obligación, la valentía de dejarse conmover.</strong></p>
-</div>
+        <p>El abuso de la razón se manifiesta con nitidez en el mecanismo de defensa conocido como <em>intelectualización</em>. Aquellas personas que sufrieron traumas relacionales tempranos suelen refugiarse en el ático de su mente racional. Analizan sus tragedias como si le hubieran ocurrido a un tercero, teorizan sobre sus divorcios con un distanciamiento clínico admirable y explican conceptualmente sus vacíos existenciales.</p>
+        <p>Se convencen de que son seres profundamente objetivos, cuando la realidad es que están usando la erudición y la semántica como un chaleco antibalas para evitar experimentar el dolor en su propia carne. Es una estrategia de supervivencia eficaz a corto plazo, pero condena al individuo a una existencia incorpórea y de plástico, donde la intimidad real se vuelve imposible porque <strong>la intimidad exige, de forma irrenunciable, la vulnerabilidad de sentir.</strong></p>
+      </div>
     `
   },
   {
@@ -1466,7 +1370,7 @@ const CHAPTERS = [
 
         <h2>Fundamentos neurobiológicos de las prácticas</h2>
         <p>Al ejecutar la <em>Pausa de los 90 Segundos</em>, estamos honrando la ventana temporal biológica descubierta por la neurocientífica Jill Bolte Taylor. Cuando un estímulo externo desata una reacción emocional de enojo o pánico, la descarga química de hormonas y neurotransmisores tarda exactamente noventa segundos en ser bombeada, inundar el torrente sanguíneo y disiparse por completo.</p>
-        <p>Cuando una emoción dura más de un minuto y medio, la culpa ya no es del cuerpo ni de lo que detonó la situación. La culpa es de nuestra Mente Reflexiva, que llega a revivir la crisis echándole leña al fuego con historias exageradas, lamentos y pensamientos que no paran de dar vueltas. Si logras frenar tu reacción durante noventa segundos, le das tiempo al cuerpo para que diluya esa química y la tormenta pase de forma natural.</strong></p>
+        <p>Si la emoción persiste más allá de ese minuto y medio, no se debe a la biología del estímulo inicial; se debe exclusivamente a que la Mente Reflexiva ha acudido al rescate de la crisis inyectándole combustible de alta potencia mediante bucles lógicos de rumiación, victimismo e historias mentales catastrofistas. <strong>Interrumpir la respuesta exterior durante noventa segundos permite que la tormenta química amaine de forma natural.</strong></p>
 
         <h2>Obstáculos y errores comunes</h2>
         <p><strong>La tiranía de la urgencia digital:</strong> Habitamos un ecosistema social tecnológicamente diseñado para hiperestimular la Mente Instintiva. Las notificaciones incesantes, los algoritmos de gratificación dopaminérgica instantánea y la cultura del hiperconsumo conspiran activamente para mantener tu amígdala cerebral en un estado de alerta y reactividad perpetua.</p>
@@ -1861,24 +1765,7 @@ document.addEventListener('keydown', (e) => {
   } else {
     goToChapter(0);
   }
-
-
 })();
-
-const themeToggle = document.getElementById('themeToggle');
-
-themeToggle.addEventListener('click', () => {
-
-  document.body.classList.toggle('light-theme');
-
-  if(document.body.classList.contains('light-theme')){
-    themeToggle.textContent = '☀️ Claro';
-  } else {
-    themeToggle.textContent = '🌙 Oscuro';
-  }
-
-});
-
 </script>
 
 </body>
