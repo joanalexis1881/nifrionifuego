@@ -651,6 +651,17 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   line-height: 1.3;
 }
 
+.highlight {
+  background-color: var(--ice);      /* #D7F3F5 (Tu azul institucional) */
+  color: var(--black);               /* #0A0A0A (Cambia la letra a negro para dar un súper contraste) */
+  padding: 2px 6px;                  /* Agrega espacio interno para simular un resaltador real */
+  border-radius: 4px;                /* Suaviza un poco las esquinas del marcador */
+  font-weight: 600;                  /* Hace la tipografía un poco más firme */
+  display: inline;                   /* Mantiene el flujo natural del párrafo */
+  box-decoration-break: clone;       /* Si la frase salta de renglón, dibuja el fondo de forma limpia */
+  -webkit-box-decoration-break: clone;
+}
+
 /* ══════════════════════════════════════
    MODAL
 ══════════════════════════════════════ */
@@ -793,6 +804,8 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   from { opacity: 0; transform: translateY(12px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+
+
 
 </style>
 </head>
@@ -1072,31 +1085,48 @@ const CHAPTERS = [
       <div class="chapter-header">
         <span class="chapter-label">Capítulo 2</span>
         <h1 class="chapter-title">Anatomía del Conflicto Interior</h1>
-        <p class="chapter-subtitle">Cómo tu cerebro crea la guerra que vives por dentro</p>
-      </div>
-      <div class="chapter-content">
-        <p>No tienes una mente única y uniforme; albergas dos sistemas de procesamiento cognitivo radicalmente diferentes que conviven bajo el mismo cráneo. El psicólogo Daniel Kahneman codificó de manera magistral estas dos vías de pensamiento llamándolas Sistema 1 y Sistema 2. Para comprender la crudeza de tu conflicto cotidiano, es fundamental llamarlas por su nombre operativo y vivencial: la <strong>Mente Instintiva</strong> y la <strong>Mente Reflexiva</strong>.</p>
+<p class="chapter-subtitle">Cómo tu cerebro crea la guerra que vives por dentro</p>
+</div>
 
-        <h2>La Mente Instintiva y la Mente Reflexiva</h2>
-        <p>La <strong>Mente Instintiva</strong> es veloz, asociativa, emocional, automática e inconsciente. Funciona en una escala de milisegundos sin requerir tu permiso. Es el software evolutivo que te obliga a retirar la mano de una superficie hirviendo antes de que computes el concepto de dolor, el que detecta una mirada hostil en una fracción de segundo y el que genera esa oleada instantánea de simpatía, miedo o atracción. Su consumo energético es bajísimo, por lo que el cerebro la prefiere para casi todo.</p>
-        <p>Por otro lado, la <strong>Mente Reflexiva</strong> es lenta, analítica, deliberada y profundamente lógica. Requiere un esfuerzo consciente y consume una cantidad ingente de glucosa y energía. Es el sistema que utilizas para balancear tu presupuesto mensual, planificar una estrategia corporativa a cinco años o aprender una estructura sintáctica compleja. Debido a su alto costo energético, el cerebro la mantiene en un estado de hibernación relativa, activándola únicamente cuando el entorno presenta un problema que la Mente Instintiva no puede resolver mediante atajos.</p>
-        <p><strong>La Mente Instintiva ejecuta el 95% de tus conductas diarias.</strong> La Mente Reflexiva suele despertarse tarde, no para decidir, sino para redactar un informe racional que justifique la decisión que el instinto ya tomó.</p>
+<div class="chapter-content">
+  <p>No tienes una mente única y uniforme; albergas dos sistemas de procesamiento cognitivo radicalmente diferentes que conviven bajo el mismo cráneo. El psicólogo y premio Nobel Daniel Kahneman codificó de manera magistral estas dos vías de pensamiento llamándolas Sistema 1 y Sistema 2. Sin embargo, para comprender la crudeza y el dolor de tu conflicto cotidiano, es fundamental llamarlas por su nombre operativo y vivencial: <strong>la Mente Instintiva</strong> y <strong>la Mente Reflexiva</strong>.</p>
+  
+  <p><span class="highlight">La guerra que experimentas por dentro no es un fallo de fábrica; es el resultado de dos gigantes intentando tomar el control del mismo volante.</span></p>
 
-        <h2>Sesgos y trampas de ambos sistemas</h2>
-        <p>Este diseño es una genialidad evolutiva para sobrevivir en la sabana de hace doscientos mil años, donde dudar ante un ruido entre la maleza significaba la muerte. Sin embargo, el mundo moderno no es la sabana. Cuando la Mente Instintiva se enfrenta a mercados financieros, contratos laborales o crisis matrimoniales, sus atajos se transforman en sesgos cognitivos autodestructivos:</p>
-        <ul>
-          <li><strong>El sesgo de confirmación:</strong> Tu mente límbica adopta una postura emocional inmediata y ordena a la razón buscar exclusivamente los datos que validen esa postura, ignorando cualquier evidencia en contrario.</li>
-          <li><strong>La aversión a la pérdida:</strong> El dolor neurológico de perder cien dólares es el doble de intenso que el placer de ganarlos, atrapándote en empleos grises o relaciones marchitas por el puro terror evolutivo a perder tu precaria seguridad.</li>
-        </ul>
-        <p>Pero la solución no consiste en hipertrofiar la Mente Reflexiva. Cuando esta se desconecta del sentir, engendra patologías cognitivas igual de paralizantes. La más célebre es la <em>parálisis por análisis</em>: un estado agónico donde el individuo evalúa tantas variables y escenarios posibles que es incapaz de dar un paso, ignorando que no decidir es, en sí mismo, una decisión con consecuencias.</p>
+  <h2>La Mente Instintiva y la Mente Reflexiva</h2>
+  <p>La <strong>Mente Instintiva</strong> es veloz, asociativa, emocional, automática e inconsciente. Funciona en una escala de milisegundos sin requerir tu permiso. Es el software evolutivo que te obliga a retirar la mano de una superficie hirviendo antes de que computes el concepto de dolor, el que detecta una mirada hostil en una fracción de segundo y el que genera esa oleada instantánea de simpatía, miedo o atracción. Su consumo energético es bajísimo, por lo que el cerebro la prefiere para casi todo. <strong>Es la mente que gobierna a Susan.</strong> Cuando el camión frenó en la autopista, su Mente Instintiva tomó el control absoluto, disparando la ira y el pánico sin que la lógica tuviera tiempo de presentar un argumento.</p>
+  
+  <p>Por otro lado, la <strong>Mente Reflexiva</strong> es lenta, analítica, deliberada y profundamente lógica. Requiere un esfuerzo consciente y consume una cantidad ingente de glucosa y energía. Es el sistema que utilizas para balancear tu presupuesto mensual, planificar una estrategia corporativa a cinco años o aprender una estructura sintáctica compleja. Debido a su alto costo energético, el cerebro la mantiene en un estado de hibernación relativa, activándola únicamente cuando el entorno presenta un problema que la Mente Instintiva no puede resolver mediante atajos. <strong>Es el refugio de Julián.</strong> Ante el peligro, su Mente Reflexiva se encendió para calcular distancias y fricciones, usándola como un escudo para aislarse del impacto del miedo físico.</p>
+  
+  <p><span class="highlight">La Mente Instintiva ejecuta el 95% de tus conductas diarias. La Mente Reflexiva suele despertarse tarde, no para decidir, sino para redactar un informe que justifique la decisión que el instinto ya tomó.</span></p>
 
-        <div class="reflexion">
-          <span class="reflexion__label">✦ Reflexión 2 · Cartografía de tu fricción mental</span>
-          <p>Cada vez que te descubras pronunciando la clásica frase: «Sé perfectamente lo que tengo que hacer, pero no me sale», estás presenciando un cisma entre tus dos mentes. La Reflexiva ha trazado la ruta correcta, pero la Instintiva se niega a encender el motor porque percibe un peligro invisible para el intelecto.</p>
-        </div>
-      </div>
+  <h2>Sesgos y trampas de ambos sistemas: Las vidas de Susan y Julián</h2>
+  <p>Este diseño es una genialidad evolutiva para sobrevivir en la sabana de hace doscientos mil años, donde dudar ante un ruido entre la maleza significaba la muerte. Sin embargo, el mundo moderno no es la sabana. Cuando la Mente Instintiva se enfrenta a mercados financieros, contratos laborales o crisis matrimoniales, sus atajos biológicos se transforman en sesgos cognitivos autodestructivos. Es aquí donde Susan y Julián sabotean sus destinos de formas opuestas:</p>
+
+  <p><strong>El sesgo de confirmación (El incendio de Susan):</strong> Tu mente límbica o instintiva adopta una postura emocional inmediata y le ordena a la razón buscar exclusivamente los datos que validen esa postura, ignorando cualquier evidencia en contrario. Cuando Susan tiene una inseguridad en su relación, su Mente Instintiva asume de inmediato la traición. A partir de ese segundo, su razón se convierte en una detective corrupta: busca un mensaje tardío, un tono de voz inusual o una mirada distraída para justificar su pánico. <span class="highlight">Susan no busca la verdad; busca tener la razón sobre su propio dolor.</span></p>
+
+  <p><strong>La aversión a la pérdida (El congelamiento de Julián):</strong> El dolor neurológico de perder cien dólares es el doble de intenso que el placer de ganarlos. Es el terror evolutivo a perder la precaria seguridad lo que nos atrapa en empleos grises o relaciones marchitas. Julián lleva años en un puesto de trabajo que apaga su espíritu, pero su Mente Reflexiva ha construido un fuerte inexpugnable de excusas lógicas sobre la estabilidad económica para camuflar una verdad más simple: su instinto está aterrado al cambio. <span class="highlight">Julián utiliza la lógica para justificar su cobardía.</span></p>
+
+  <p>Pero la solución no consiste en hipertrofiar la Mente Reflexiva para erradicar el instinto. Cuando la razón se desconecta por completo del sentir, engendra patologías cognitivas igual de paralizantes. La más célebre es la <strong>parálisis por análisis</strong>. Es el estado agónico donde un individuo evalúa tantas variables, estadísticas y escenarios posibles que se vuelve incapaz de dar un solo paso. <span class="highlight">No decidir es, en sí mismo, una decisión con consecuencias catastróficas.</span> Es la mente de Julián atrapada en un laberinto de lógica pura sin salida de emergencia.</p>
+
+  <h2>El puente de la Templanza: La danza de Ana María</h2>
+  <p>La genialidad de <strong>Ana María</strong> no radica en poseer un cerebro biológicamente diferente al de Julián o Susan, sino en haber construido un puente colgante sobre el abismo que separa a sus dos mentes.</p>
+  
+  <p>Cuando el camión frena, su Mente Instintiva procesa el peligro a la velocidad de la luz y le entrega la adrenalina necesaria para reaccionar. Pero en lugar de permitir que esa emoción secuestre su cabina como a Susan, o de obligar a su intelecto a negarla como a Julián, Ana María utiliza su Mente Reflexiva para abrazar y contener el instinto. Su razón no tiraniza a su emoción; se convierte en su contenedor. Al decirse <em>«estoy a salvo»</em>, la Mente Reflexiva le da una lectura lógica a la tormenta química del cuerpo, permitiendo que el sistema nervioso recupere el equilibrio en segundos. <span class="highlight">La Templanza es esto: la Mente Reflexiva guiando con amor la fuerza salvaje de la Mente Instintiva.</span></p>
+
+  <div class="reflexion">
+    <span class="reflexion__label">✦ Reflexión 2 · Cartografía de tu fricción mental</span>
+    <p>Cada vez que te descubras pronunciando la clásica frase: <em>«Sé perfectamente lo que tengo que hacer, pero no me sale»</em>, estás presenciando en vivo un cisma entre tus dos mentes. Tu Mente Reflexiva (tu Julián interior) ha trazado la ruta perfecta en el mapa, pero tu Mente Instintiva (tu Susan interior) se niega rotundamente a encender el motor porque percibe un peligro invisible para el intelecto.</p>
+    <p>Identifica un área de tu vida actual donde estés atrapado en esta parálisis. Desglosa:</p>
+    <ul>
+      <li>¿Qué te dicta tu Mente Reflexiva con sus argumentos lógicos?</li>
+      <li>¿Qué herida o peligro primitivo está intentando proteger tu Mente Instintiva a través del miedo o la procrastinación?</li>
+    </ul>
+  </div>
+</div>
     `
   },
+
   {
     id: 'cap3',
     navLabel: 'Capítulo 3 · Lo que las emociones son',
@@ -1105,21 +1135,45 @@ const CHAPTERS = [
       <div class="chapter-header">
         <span class="chapter-label">Capítulo 3</span>
         <h1 class="chapter-title">Lo Que las Emociones Realmente Son</h1>
-        <p class="chapter-subtitle">La información que tu cuerpo lleva décadas intentando comunicarte</p>
-      </div>
-      <div class="chapter-content">
-        <p>Hemos vaciado de significado la palabra «emoción». En la cultura popular, se asocia exclusivamente con arrebatos teatrales, histeria o sentimentalismo blando. Sin embargo, desde una perspectiva estrictamente científica y fenomenológica, las emociones no son interrupciones de tu estabilidad; son el sistema de navegación biológica más sofisticado de tu organismo. Son paquetes de información de alta velocidad que te revelan el estado real de tu relación con el entorno.</p>
+<p class="chapter-subtitle">La información que tu cuerpo lleva décadas intentando comunicarte</p>
+</div>
 
-        <h2>Emociones primarias y el impacto de la supresión</h2>
-        <p>El trabajo transcultural de Paul Ekman demostró que existen respuestas neurofisiológicas universales que no dependen de la geografía ni de la educación: el miedo nos prepara para la supervivencia ante la amenaza; la ira moviliza recursos psicofísicos para defender un límite violado; la tristeza ralentiza el metabolismo para facilitar la digestión psíquica de una pérdida. Estas respuestas son el resultado de millones de años de depuración evolutiva.</p>
-        <p>El sufrimiento no nace del hecho de experimentar estas fuerzas, sino del analfabetismo emocional con el que las gestionamos. Cuando un niño crece en un ecosistema familiar donde el llanto se castiga con el desprecio, aprende a sepultar su tristeza. Cuando a una mujer se le enseña que la rabia la vuelve menos atractiva o peligrosa, transmuta su ira legítima en una complacencia pasivo-agresiva.</p>
-        <p>Pero la energía termodinámica de una emoción no se desvanece por decreto intelectual. Como bien señala el psiquiatra Bessel van der Kolk en su célebre axioma, <em>el cuerpo lleva la cuenta</em>. La ira amordazada se convierte en contracturas cervicales crónicas, colon irritable o insomnio pertinaz. <strong>El cuerpo es el escenario físico donde tus emociones gritan lo que tu timidez o tu orgullo intentan callar.</strong></p>
+<div class="chapter-content">
+  <p>Hemos vaciado de significado la palabra «emoción». En la cultura popular, se asocia exclusivamente con arrebatos teatrales, histeria o sentimentalismo blando. Sin embargo, desde una perspectiva estrictamente científica y fenomenológica, las emociones no son interrupciones de tu estabilidad; son el sistema de navegación biológica más sofisticado de tu organismo. <span class="highlight">Las emociones son paquetes de información de alta velocidad que te revelan el estado real de tu relación con el entorno.</span></p>
+  
+  <p>El día del casi accidente en la autopista, los tres cuerpos reaccionaron al unísono. La biología envió datos urgentes a las tres cabinas. Lo que diferenció sus destinos no fue lo que sintieron, sino el analfabetismo o la sabiduría con la que descifraron esos datos.</p>
 
-        <h2>Granularidad emocional</h2>
-        <p>La clave científica para disolver este nudo es lo que la neurocientífica Lisa Feldman Barrett denomina <em>granularidad emocional</em>: la sofisticación cognitiva para discernir con precisión milimétrica qué estás sintiendo exactamente.</p>
-        <p>Una persona con baja granularidad solo alcanza a decir que se siente «mal» o «estresada». Una mente con alta granularidad desglosa ese malestar difuso y descubre que lo que experimenta es, en realidad, una mezcla precisa de humillación, nostalgia y vulnerabilidad desprotegida.</p>
-        <p>La neurociencia demuestra que el simple acto de etiquetar una emoción con la palabra exacta reduce de inmediato la hiperactividad de la amígdala cerebral y activa la corteza prefrontal izquierda. <strong>Nombrar tu dolor con precisión no es un ejercicio poético; es un proceso biológico que seda tu sistema nervioso de forma instantánea.</strong></p>
-      </div>
+  <h2>Emociones primarias y el impacto de la supresión: El cuerpo de Julián lleva la cuenta</h2>
+  <p>El trabajo transcultural del psicólogo Paul Ekman demostró que existen respuestas neurofisiológicas universales que no dependen de la geografía ni de la educación: el miedo nos prepara para la supervivencia ante la amenaza; la ira moviliza recursos psicofísicos para defender un límite violado; la tristeza ralentiza el metabolismo para facilitar la digestión psíquica de una pérdida. Estas respuestas son el resultado de millones de años de depuración evolutiva. Tienen un propósito sagrado de preservación.</p>
+  
+  <p><span class="highlight">El sufrimiento humano no nace del hecho de experimentar estas fuerzas, sino del analfabetismo emocional con el que las gestionamos.</span> Cuando un niño crece en un ecosistema familiar donde el llanto se castiga con el desprecio, aprende a sepultar su tristeza. Cuando a una mujer se le enseña que la rabia la vuelve menos atractiva o peligrosa, transmuta su ira legítima en una complacencia pasivo-agresiva.</p>
+  
+  <p>Pero la energía termodinámica de una emoción no se desvanece por decreto intelectual. No puedes hacer desaparecer una corriente eléctrica apagando la bombilla; la energía buscará otro cable por dónde salir. Como bien señala el psiquiatra Bessel van der Kolk, <em>el cuerpo lleva la cuenta</em>.</p>
+  
+  <p>Miremos de cerca a <strong>Julián</strong>. En la autopista, presumió de haber controlado el miedo mediante la pura lógica de sus cálculos de frenado. Sin embargo, tres horas después, se encuentra en su cama sufriendo un insomnio pertinaz y un dolor punzante en las cervicales. Su mente racional amordazó el pánico, pero la adrenalina y el cortisol no drenados se quedaron atrapados en sus fibras musculares. <span class="highlight">El cuerpo es el escenario físico donde tus emociones gritan lo que tu timidez o tu orgullo intentan callar.</span> La gastritis crónica, el colon irritable o el dolor de espalda de Julián no son problemas médicos aislados; son las cartas de amor y de auxilio que su cuerpo le envía, escritas en el único idioma que la razón no puede censurar: el dolor físico.</p>
+
+  <h2>Granularidad emocional: El laberinto difuso de Susan</h2>
+  <p>La clave científica para disolver este nudo y liberar al cuerpo de la opresión es lo que la neurocientífica Lisa Feldman Barrett denomina <strong>granularidad emocional</strong>: la sofisticación cognitiva para discernir con precisión milimétrica qué estás sintiendo exactamente.</p>
+  
+  <p>Una persona con baja granularidad emocional vive en un mundo monocromático; solo alcanza a decir que se siente «mal», «abrumada» o «estresada». Esto es lo que tortura a <strong>Susan</strong>. Cuando llega a casa tras el incidente en la carretera, le grita a su pareja porque la cena no está lista. Si le preguntan qué le pasa, ella responde con frustración: <em>«¡Estoy estresada, todo el mundo me molesta!»</em>. Al no tener palabras precisas para su estado interno, Susan es incapaz de procesarlo. Su malestar es una nube tóxica difusa que lo contamina todo.</p>
+  
+  <p>Una mente con alta granularidad, en cambio, es capaz de desglosar ese malestar denso y descubrir la paleta exacta de colores que lo componen. Sabe ver que detrás del «estrés» hay una mezcla precisa de humillación, impotencia y vulnerabilidad desprotegida. <span class="highlight">Nombrar tu dolor con precisión no es un ejercicio poético; es un proceso biológico que seda tu sistema nervioso de forma instantánea.</span></p>
+
+  <h2>La amígdala sedada: El mapa de Ana María</h2>
+  <p>La neurociencia demuestra que el simple acto de etiquetar una emoción con la palabra exacta reduce de inmediato la hiperactividad de la amígdala cerebral —el centro de alarma del miedo— y activa de forma automática la corteza prefrontal izquierda, la región encargada de la autorregulación y el bienestar.</p>
+  
+  <p>Eso fue lo que salvó a <strong>Ana María</strong> en la cabina de su auto. Mientras sus manos sostenían el volante tras el frenazo, ella no se limitó a decir «estoy histérica». Su mente entrenada escaneó su cuerpo y aplicó granularidad: <em>«Siento un vacío en el estómago; es terror a morir. Siento un calor en el pecho; es indignación porque el camión fue imprudente»</em>. Al ponerle nombre y apellido a cada pasajero emocional, su corteza prefrontal tomó el control. Su amígdala redujo sus alarmas. Ana María no necesitó reprimir la emoción como Julián, ni actuarla destructivamente como Susan. La nombró, la validó y su propia biología se serenó.</p>
+
+  <div class="reflexion">
+    <span class="reflexion__label">✦ Reflexión 3 · El diario de tus mensajeros</span>
+    <p>Piensa en tus propios síntomas físicos cotidianos. Esa tensión crónica en los hombros, el nudo recurrente en la garganta o la pesadez en el estómago. Si ese síntoma corporal pudiera hablar hoy mismo y tuviera un vocabulario perfecto, ¿qué te estaría gritando?</p>
+    <p>Vamos a entrenar tu granularidad emocional justo ahora. La próxima vez que sientas un malestar difuso y te tiente la comodidad de decir «estoy estresado», detente. Prohibido usar la palabra estrés. Desglosa ese peso en al menos tres emociones específicas con la ayuda de esta bitácora:</p>
+    <ul>
+      <li>¿Es frustración por falta de control, desilusión ante una expectativa rota o miedo al rechazo?</li>
+      <li>Observa cómo cambia la tensión en tu cuerpo en el instante exacto en que logras darle a tu emoción su verdadero nombre.</li>
+    </ul>
+  </div>
+</div>
     `
   },
   {
